@@ -115,6 +115,6 @@ public class GameManager {
 		//Each level add 5 more orders
 		ordersRound += 5;
 		currentOrderNumber = 0;
-		getNewOrder();
+		getNewOrder(); 
 	}
 }
