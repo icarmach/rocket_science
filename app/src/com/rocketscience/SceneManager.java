@@ -160,7 +160,7 @@ public class SceneManager {
 		Sprite quitButton = new Sprite(0, 0, quitButtonTexture, activity.getVertexBufferObjectManager()) {
 			@Override
 			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY) {
-				activity.finish();
+				//Quit app
 				return true;
 			}
 		};
