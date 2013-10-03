@@ -19,9 +19,9 @@ public class Order {
 		this.buttonInitial = this.buttonLinked.toggled;
 		//Make the text automatic
 		if(this.buttonInitial)
-			this.orderText = "Turn off the "+this.buttonLinked.buttonText+".";
+			this.orderText = "Turn off the "+this.buttonLinked.buttonText+" ("+this.buttonLinked.section+").";
 		else
-			this.orderText = "Turn on the "+this.buttonLinked.buttonText+".";
+			this.orderText = "Turn on the "+this.buttonLinked.buttonText+" ("+this.buttonLinked.section+")";
 	}
 	
 	public Order(String orderText, Button buttonLinked, int time)
@@ -40,9 +40,9 @@ public class Order {
 		this.buttonInitial = this.buttonLinked.toggled;
 		//Redefine text
 		if(this.buttonInitial)
-			this.orderText = "Turn off the "+this.buttonLinked.buttonText+".";
+			this.orderText = "Turn off the "+this.buttonLinked.buttonText+" ("+this.buttonLinked.section+")";
 		else
-			this.orderText = "Turn on the "+this.buttonLinked.buttonText+".";
+			this.orderText = "Turn on the "+this.buttonLinked.buttonText+" ("+this.buttonLinked.section+")";
 	}
 	
 	//Checks if the linked button has changed the status since the order was started

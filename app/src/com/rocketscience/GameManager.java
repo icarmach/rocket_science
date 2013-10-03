@@ -32,32 +32,36 @@ public class GameManager {
 		// 4 - Navigation
 		//Button newButton = new Button("b1", 1, "Button 1");
 		//1 - Armory buttons
-		buttons.add(new Button("a1", 1, "Pulse Cannon"));
-		buttons.add(new Button("a2", 1, "Energy Shields"));
-		buttons.add(new Button("a3", 1, "Plasma Missiles"));
-		buttons.add(new Button("a4", 1, "Sword Shooter"));
+		buttons.add(new Button("a1", "Armory", "Pulse Cannon"));
+		buttons.add(new Button("a2", "Armory", "Energy Shields"));
+		buttons.add(new Button("a3", "Armory", "Plasma Missiles"));
+		buttons.add(new Button("a4", "Armory", "Sword Shooter"));
 		//2 - Communications buttons
-		buttons.add(new Button("c1", 2, "Newspaper Dispenser"));
-		buttons.add(new Button("c2", 2, "Journalist Simulator"));
-		buttons.add(new Button("c3", 2, "Radio Blocker"));
-		buttons.add(new Button("c4", 2, "Message Printer"));
+		buttons.add(new Button("c1", "Comm." , "News Dispenser"));
+		buttons.add(new Button("c2", "Comm." , "Journalizer"));
+		buttons.add(new Button("c3", "Comm." , "Radio Blocker"));
+		buttons.add(new Button("c4", "Comm" , "Messenger"));
 		//3 - Kitchen
-		buttons.add(new Button("k1", 3, "Egg Dispenser"));
-		buttons.add(new Button("k2", 3, "Meat Masher"));
-		buttons.add(new Button("k3", 3, "Vegetable Destroyer"));
-		buttons.add(new Button("k4", 3, "Brownie Mixer"));
+		buttons.add(new Button("k1", "Kitchen", "Egg Scrambler"));
+		buttons.add(new Button("k2", "Kitchen", "Meat Masher"));
+		buttons.add(new Button("k3", "Kitchen", "Veggie Destroyer"));
+		buttons.add(new Button("k4", "Kitchen", "Brownie Mixer"));
 		//4 - Navigation
-		buttons.add(new Button("n1", 3, "Autopilot"));
-		buttons.add(new Button("n2", 3, "Autoparking"));
-		buttons.add(new Button("n3", 3, "Lightspeed Drive"));
-		buttons.add(new Button("n4", 3, "Flux Capacitor"));
+		buttons.add(new Button("n1", "Nav.", "Autopilot"));
+		buttons.add(new Button("n2", "Nav.", "Autoparking"));
+		buttons.add(new Button("n3", "Nav.", "Lightspeed Drive"));
+		buttons.add(new Button("n4", "Nav.", "Flux Capacitor"));
 		//Define orders
 		//Just iterate through buttons, creating one order per button
 		for(Button e: buttons){
+			//Debug
+				//if(e.identifier.contains("a") || e.identifier.contains("c"))
     			orders.add(new Order(e, 100));
     		}
+		//Random
+		randomGenerator = new Random();
 		//Reset counters
-		ordersRound = 0;
+		ordersRound = 10;
 		currentOrderNumber = 0;
 		
 	}
@@ -76,6 +80,9 @@ public class GameManager {
 	//It it isn't, do NOTHING
 	public boolean isRoundOver()
 	{
+		if(currentOrder == null)
+			getNewOrder();
+		
 		if(currentOrderNumber >= ordersRound)
 			return true;
 		else
@@ -96,7 +103,10 @@ public class GameManager {
 	{
 		for(Button e: buttons){
     		if(e.identifier.equals(buttonIdentifier))
-    			e.toggleButton();
+	    		{
+	    			e.toggleButton();
+	    		}
+    			
     		}
 	}
 	
