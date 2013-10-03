@@ -74,7 +74,7 @@ public class GameManager {
 	//If it isn't, checks currentOrder to see if it is done.
 	//If it is, add 1 to currentOrderNumber and get a new random order
 	//It it isn't, do NOTHING
-	public boolean roundOver()
+	public boolean isRoundOver()
 	{
 		if(currentOrderNumber >= ordersRound)
 			return true;
@@ -116,5 +116,15 @@ public class GameManager {
 		ordersRound += 5;
 		currentOrderNumber = 0;
 		getNewOrder(); 
+	}
+	
+	//Get button text by identifier
+	public String getButtonTextByIdentifier(String buttonIdentifier)
+	{
+		for(Button e: buttons){
+    		if(e.identifier.equals(buttonIdentifier))
+    			return e.buttonText;
+    		}
+		return "";
 	}
 }

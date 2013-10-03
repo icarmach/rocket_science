@@ -2,16 +2,23 @@ package com.rocketscience;
 
 import org.andengine.engine.Engine;
 import org.andengine.engine.camera.Camera;
+import org.andengine.entity.primitive.Rectangle;
 import org.andengine.entity.scene.Scene;
 import org.andengine.entity.scene.background.Background;
 import org.andengine.entity.sprite.Sprite;
+import org.andengine.entity.text.Text;
+import org.andengine.entity.text.TextOptions;
 import org.andengine.input.touch.TouchEvent;
+import org.andengine.opengl.font.Font;
 import org.andengine.opengl.texture.TextureOptions;
 import org.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlas;
 import org.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlasTextureRegionFactory;
 import org.andengine.opengl.texture.region.ITextureRegion;
 import org.andengine.opengl.util.GLState;
+import org.andengine.opengl.vbo.VertexBufferObjectManager;
 import org.andengine.ui.activity.BaseGameActivity;
+import org.andengine.util.HorizontalAlign;
+
 
 public class SceneManager {
 
@@ -24,7 +31,18 @@ public class SceneManager {
 	Scene splashScene;
 	Scene titleScene;
 	Scene mainGameScene;
-
+	//Text
+	Font mFont;
+	VertexBufferObjectManager vbom;
+	//Game Logic
+	GameManager gm;
+	Text centerText;
+	//Buttons
+	Button button1;
+	Button button2;
+	Button button3;
+	Button button4;
+	
 	public enum SceneType
 	{
 		SPLASH,
@@ -36,6 +54,7 @@ public class SceneManager {
 		this.activity = activity;
 		this.engine = engine;
 		this.camera = camera;
+		
 	}
 
 	//Method loads all of the splash scene resources
@@ -48,8 +67,14 @@ public class SceneManager {
 
 
 	//Method loads all of the resources for the game scenes
-	public void loadGameSceneResources() {
-
+	public void loadGameSceneResources(Font mFont, VertexBufferObjectManager vbom) {
+		this.mFont = mFont;
+		this.vbom = vbom;
+		//Logic
+		gm = new GameManager();
+		//getEngine().getTextureManager().loadTexture(fontTextureAtlas);
+		//this.mFont = FontFactory.create(this.getFontManager(), this.getTextureManager(), 256, 256, Typeface.create(Typeface.DEFAULT, Typeface.BOLD), 32);
+		//this.mFont.load();
 	}
 
 	//Method creates the Splash Scene
@@ -85,6 +110,7 @@ public class SceneManager {
 		//Create the Main Game Scene
 		mainGameScene = new Scene();
 		createMainGameScene();
+		//Loop?
 	}
 
 	//Method create the Title Scene
@@ -111,6 +137,7 @@ public class SceneManager {
 			@Override
 			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY) {
 				setCurrentScene(SceneType.MAINGAME);
+				
 				return true;
 			}
 		};
@@ -200,6 +227,9 @@ public class SceneManager {
 			}
 		};
 		
+		//Button example
+		
+		//
 		BitmapTextureAtlas buttonsPanelTextureAtlas = new BitmapTextureAtlas(activity.getTextureManager(), 480, 480, TextureOptions.DEFAULT);
 		ITextureRegion buttonsPanelTexture = BitmapTextureAtlasTextureRegionFactory.createFromAsset(buttonsPanelTextureAtlas, activity, "buttons_panel.JPG", 0, 0);
 		buttonsPanelTextureAtlas.load();
@@ -220,11 +250,13 @@ public class SceneManager {
 		ITextureRegion buttonOffTexture = BitmapTextureAtlasTextureRegionFactory.createFromAsset(buttonOffTextureAtlas, activity, "button_off.png", 0, 0);
 		buttonOffTextureAtlas.load();
 		
+		
+				
 		final Sprite buttonOff1 = new Sprite(0, 0, buttonOffTexture, activity.getVertexBufferObjectManager()) {
 			@Override
 			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY) {
 				this.setVisible(!this.isVisible());
-				
+				//button1.buttonText = "WHAT";
 				return true;
 			}
 		};
@@ -235,13 +267,19 @@ public class SceneManager {
 				if(pSceneTouchEvent.isActionDown()) {
 					this.setVisible(!this.isVisible());
 					buttonOff1.setVisible(!buttonOff1.isVisible());
+					testLoop();
 				}
 				return true;
 			}
 		};
 		
-		
-		
+		//SEXY TEXT
+		//Before that, display text
+		//final VertexBufferObjectManager vertexBufferObjectManager = new VertexBufferObjectManager();
+		centerText = new Text(45, 40 + 350, this.mFont, "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", new TextOptions(HorizontalAlign.CENTER),this.vbom);
+		centerText.setText("Button Text");
+		//
+		//centerText.setWidth(100);		
 		buttonOff1.setVisible(false);
 		
 		armory.setPosition(0, 0);
@@ -280,6 +318,10 @@ public class SceneManager {
 		mainGameScene.registerTouchArea(buttonOff1);
 		mainGameScene.setTouchAreaBindingOnActionDownEnabled(true);
 		mainGameScene.attachChild(buttonOff1);
+		//Print the texts and the background
+		final Rectangle rect1 = this.makeColoredRectangle(30, 40 + 350,1, 1, 1, this.vbom);
+		mainGameScene.attachChild(rect1);
+		mainGameScene.attachChild(centerText);
 		
 		
 	}
@@ -301,8 +343,31 @@ public class SceneManager {
 			break;
 		case MAINGAME:
 			engine.setScene(mainGameScene);
+			//Loop goes here
+			/*while(true)
+			{
+				centerText.setText(button1.buttonText);
+			}*/			
 			break;
+			//centerText.setText(button1.buttonText);
 		}
+	}
+	//Rectangle drawing
+	private Rectangle makeColoredRectangle(final float pX, final float pY, final float pRed, final float pGreen, final float pBlue, VertexBufferObjectManager vbom) {
+		final Rectangle coloredRect = new Rectangle(pX, pY, 180, 30, vbom);
+		coloredRect.setColor(pRed, pGreen, pBlue);
+		return coloredRect;
+	}
+	
+	/*@Override
+	public void onUpdate()
+	{
+		
+	}*/
+	
+	public void testLoop()
+	{
+		this.centerText.setText(this.centerText.getText() + "a");
 	}
 
 

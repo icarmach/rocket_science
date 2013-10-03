@@ -38,6 +38,11 @@ public class Order {
 	public void refreshOrder()
 	{
 		this.buttonInitial = this.buttonLinked.toggled;
+		//Redefine text
+		if(this.buttonInitial)
+			this.orderText = "Turn off the "+this.buttonLinked.buttonText+".";
+		else
+			this.orderText = "Turn on the "+this.buttonLinked.buttonText+".";
 	}
 	
 	//Checks if the linked button has changed the status since the order was started
