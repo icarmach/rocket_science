@@ -21,3 +21,6 @@ local.properties
 
 # Mac
 .DS_Store
+
+# Andriod
+.properties
