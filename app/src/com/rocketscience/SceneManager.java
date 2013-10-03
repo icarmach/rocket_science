@@ -36,6 +36,8 @@ public class SceneManager {
 	VertexBufferObjectManager vbom;
 	//Game Logic
 	GameManager gm;
+	GameThread gt;
+	
 	Text centerText;
 	//Buttons
 	Button button1;
@@ -111,6 +113,7 @@ public class SceneManager {
 		mainGameScene = new Scene();
 		createMainGameScene();
 		//Loop?
+		
 	}
 
 	//Method create the Title Scene
@@ -118,7 +121,7 @@ public class SceneManager {
 		titleScene.setBackground(new Background(0, 0, 0));
 
 		BitmapTextureAtlas gameBannerTextureAtlas = new BitmapTextureAtlas(activity.getTextureManager(), 475, 334, TextureOptions.DEFAULT);
-		ITextureRegion gameBannerTexture = BitmapTextureAtlasTextureRegionFactory.createFromAsset(gameBannerTextureAtlas, activity, "banner.png", 0, 0);
+		ITextureRegion gameBannerTexture = BitmapTextureAtlasTextureRegionFactory.createFromAsset(gameBannerTextureAtlas, activity, "Banner.png", 0, 0);
 		gameBannerTextureAtlas.load();
 
 		Sprite gameBanner = new Sprite(0, 0, gameBannerTexture, activity.getVertexBufferObjectManager()) {
@@ -255,7 +258,7 @@ public class SceneManager {
 		final Sprite buttonOff1 = new Sprite(0, 0, buttonOffTexture, activity.getVertexBufferObjectManager()) {
 			@Override
 			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY) {
-				this.setVisible(!this.isVisible());
+				//this.setVisible(!this.isVisible());
 				//button1.buttonText = "WHAT";
 				return true;
 			}
@@ -273,6 +276,8 @@ public class SceneManager {
 			}
 		};
 		
+		buttonOn1.setTag(10);
+		
 		//SEXY TEXT
 		//Before that, display text
 		//final VertexBufferObjectManager vertexBufferObjectManager = new VertexBufferObjectManager();
@@ -281,6 +286,8 @@ public class SceneManager {
 		//
 		//centerText.setWidth(100);		
 		buttonOff1.setVisible(false);
+		
+		buttonOff1.setTag(11);
 		
 		armory.setPosition(0, 0);
 		communication.setPosition(240, 0);
@@ -323,7 +330,8 @@ public class SceneManager {
 		mainGameScene.attachChild(rect1);
 		mainGameScene.attachChild(centerText);
 		
-		
+		 gt = new GameThread(mainGameScene, gm);
+		 gt.start();
 	}
 
 	//Method allows you to get the currently active scene

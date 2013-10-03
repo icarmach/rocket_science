@@ -25,6 +25,7 @@ public class MainActivity extends BaseGameActivity {
 	private FontManager fm;
 	private VertexBufferObjectManager vbom;
 	private Font mFont;
+	
 	@Override
 	public EngineOptions onCreateEngineOptions() {
 		mCamera = new Camera(0, 0, CAMERA_WIDTH, CAMERA_HEIGHT);
@@ -45,7 +46,7 @@ public class MainActivity extends BaseGameActivity {
 		//Create the font
 		this.mFont = FontFactory.create(fm, this.getTextureManager(), 256, 256, Typeface.create(Typeface.DEFAULT, Typeface.BOLD),25);
 		this.mFont.load();
-
+		
 		//
 		pOnCreateResourcesCallback.onCreateResourcesFinished();
 	}
