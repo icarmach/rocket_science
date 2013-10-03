@@ -19,7 +19,7 @@ import org.andengine.util.debug.Debug;
 import org.andengine.util.exception.MethodNotSupportedException;
 
 import android.opengl.GLES20;
-import android.renderscript.Mesh;
+//import android.renderscript.Mesh;
 
 /**
  * (c) Zynga 2012
