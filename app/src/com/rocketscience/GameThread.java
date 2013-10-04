@@ -14,6 +14,7 @@ public class GameThread extends Thread{
 	boolean gameIsRunning;
 	int levelCounter;
 	Rectangle orderRectangle;
+	Rectangle timeRectangle;
 	//Time counter
 	int timeCounter;
 	int errorCounter;
@@ -33,6 +34,7 @@ public class GameThread extends Thread{
 		this.errorCounter = 0;
 		this.loseSplash = loseSplash;
 		this.victorySplash = victorySplash;
+		this.timeRectangle = (Rectangle)currentScene.getChildByTag(500);
 	}
 	
 	public void run() {
@@ -86,6 +88,7 @@ public class GameThread extends Thread{
 				{
 					//colorValue = (float)0.8+(timeCounter/5000);
 					//this.orderRectangle.setColor((float)colorValue, 0, 0);
+					timeRectangle.setWidth((float) (480.0 / 5000)*(5000 - timeCounter));
 					timeCounter++;
 				}
 				else

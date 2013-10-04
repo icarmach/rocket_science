@@ -168,7 +168,7 @@ public class SceneManager {
 		Sprite quitButton = new Sprite(0, 0, quitButtonTexture, activity.getVertexBufferObjectManager()) {
 			@Override
 			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY) {
-				//Quit app
+				activity.finish();
 				return true;
 			}
 		};
@@ -1149,6 +1149,7 @@ public class SceneManager {
 		//Print the texts and the background
 		//We create the rectangles
 		final Rectangle orderRectangle = this.makeColoredRectangle(0,300,1, 1, 1, this.vbom, (int)this.camera.getWidth(), 80);
+		final Rectangle timeRectangle = this.makeColoredRectangle(0,295,1, 0, 0, this.vbom, (int)this.camera.getWidth(), 5);
 		
 		final Rectangle button1Rectangle = this.makeColoredRectangle(30, 40 + 350,1, 1, 1, this.vbom, 180, 30);
 		final Rectangle button2Rectangle = this.makeColoredRectangle(270, 40+350,1, 1, 1, this.vbom, 180, 30);
@@ -1157,6 +1158,10 @@ public class SceneManager {
 		
 		//Orders rectangle
 		mainGameScene.attachChild(orderRectangle);
+		
+		//Time Rectangle
+		timeRectangle.setTag(500);
+		mainGameScene.attachChild(timeRectangle);
 		//Button rectangles
 		mainGameScene.attachChild(button1Rectangle);
 		mainGameScene.attachChild(button2Rectangle);
