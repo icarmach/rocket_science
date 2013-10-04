@@ -17,7 +17,7 @@ public class GameManager {
 	//Used to obtain randoms
 	int index;
 	private Random randomGenerator;
-	
+	public boolean changedRecently;
 	
 	public GameManager()
 	{
@@ -63,6 +63,8 @@ public class GameManager {
 		//Reset counters
 		ordersRound = 10;
 		currentOrderNumber = 0;
+		//Recently
+		changedRecently = false;
 		
 	}
 		
@@ -93,6 +95,7 @@ public class GameManager {
 				//Refresh old order
 				currentOrder.refreshOrder();
 				getNewOrder();
+				changedRecently = true;
 			}
 			return false;
 		}			
@@ -128,6 +131,15 @@ public class GameManager {
 		getNewOrder(); 
 	}
 	
+	//Start new round, with more difficulty
+	public void resetGame()
+	{
+			//Each level add 5 more orders
+		ordersRound = 10;
+		currentOrderNumber = 0;
+		getNewOrder(); 
+	}
+		
 	//Get button text by identifier
 	public String getButtonTextByIdentifier(String buttonIdentifier)
 	{
@@ -136,5 +148,19 @@ public class GameManager {
     			return e.buttonText;
     		}
 		return "";
+	}
+	
+	//Has been changed recently?
+	public boolean hasBeenChangedRecently()
+	{
+		if(changedRecently)
+		{
+			changedRecently = false;
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 }

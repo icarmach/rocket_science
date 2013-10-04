@@ -3,6 +3,7 @@ package com.rocketscience;
 import org.andengine.entity.IEntity;
 import org.andengine.entity.primitive.Rectangle;
 import org.andengine.entity.scene.Scene;
+import org.andengine.entity.sprite.Sprite;
 import org.andengine.entity.text.Text;
 
 public class GameThread extends Thread{
@@ -16,8 +17,12 @@ public class GameThread extends Thread{
 	//Time counter
 	int timeCounter;
 	int errorCounter;
+	float colorValue;
+	Sprite loseSplash;
+	Sprite victorySplash;
+	//
 	
-	public GameThread(Scene startScene, GameManager gm, Rectangle orderRectangle)
+	public GameThread(Scene startScene, GameManager gm, Rectangle orderRectangle, Sprite loseSplash, Sprite victorySplash)
 	{
 		this.currentScene = startScene;
 		this.gm = gm;
@@ -26,6 +31,8 @@ public class GameThread extends Thread{
 		this.orderRectangle = orderRectangle;
 		this.timeCounter = 0;
 		this.errorCounter = 0;
+		this.loseSplash = loseSplash;
+		this.victorySplash = victorySplash;
 	}
 	
 	public void run() {
@@ -36,7 +43,7 @@ public class GameThread extends Thread{
 			errorCounter = 0;
 			while(!this.gm.isRoundOver())
 			{
-				//GAME LOOP EL LUP LUP PICO CON TODOS
+				//GAME LOOP EL LUP LUP
 				if(this.gm.currentOrder == null)
 					this.gm.getNewOrder();
 				//Create new round
@@ -45,22 +52,43 @@ public class GameThread extends Thread{
 					//Start new round
 					this.gm.newRound();
 				}*/
+				
+				//ERROR CHECK
+				if(errorCounter > 10)
+				{
+					loseSplash.setPosition(0,200);
+					try {
+						this.sleep(2000);
+						} catch (InterruptedException e) {
+						e.printStackTrace();
+						}
+					loseSplash.setPosition(2000,2000);
+					this.gm.resetGame();
+					levelCounter = 1;
+					Text orderTextLabel= (Text)currentScene.getChildByTag(1);
+					orderTextLabel.setText("Get ready for Level "+levelCounter+"!");
+					try {
+						this.sleep(2000);
+						} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+						}
+					
+				}
+				//Check to see if the order has changed recently
+				if(this.gm.hasBeenChangedRecently())
+					timeCounter = 0;
 				//Change the text of the buttons if needed
 				//currentScene
 				//Change the text of the instruction and check the status
 				//Background progressive change
-				if(timeCounter >= 3000 && timeCounter < 4000)
+				if(timeCounter < 5000)
 				{
-					this.orderRectangle.setColor(0.7f, 0, 0);
+					//colorValue = (float)0.8+(timeCounter/5000);
+					//this.orderRectangle.setColor((float)colorValue, 0, 0);
+					timeCounter++;
 				}
-				else if(timeCounter >= 4000 && timeCounter < 5000)
-				{
-					this.orderRectangle.setColor(0.8f, 0, 0);
-				}
-					
-				
-				
-				if(timeCounter >= 5000)
+				else
 				{
 					//5 seconds have passed, change mission, increase errorCounter
 					this.gm.getNewOrder();
@@ -68,6 +96,7 @@ public class GameThread extends Thread{
 					this.orderRectangle.setColor(1, 1, 1);
 					timeCounter = 0;
 				}
+				
 				Text orderTextLabel= (Text)currentScene.getChildByTag(1);
 				orderTextLabel.setText(this.gm.getCurrentOrderText());
 				//IEntity boton1 = currentScene.getChildByTag(10);
@@ -77,23 +106,22 @@ public class GameThread extends Thread{
 				try {
 					//this.orderRectangle.setColor(1, 1, 1);
 					this.sleep(1);
-					timeCounter++;
 					//this.orderRectangle.setColor(1, 0, 0);
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
 			//END OF ROUND
 			Text orderTextLabel= (Text)currentScene.getChildByTag(1);
-			orderTextLabel.setText("Level Complete!");
+			//orderTextLabel.setText("Level Complete!");
+			victorySplash.setPosition(0,200);
 			try {
 				this.sleep(4000);
 				} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 				}
 			levelCounter++;
+			victorySplash.setPosition(2000,2000);
 			orderTextLabel.setText("Get ready for Level "+levelCounter+"!");
 			try {
 				this.sleep(2000);
