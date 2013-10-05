@@ -26,6 +26,9 @@ public class SceneManager {
 	private BaseGameActivity activity;
 	private Engine engine;
 	private Camera camera;
+	
+	private TagHandler th;
+	
 	BitmapTextureAtlas splashTextureAtlas;
 	ITextureRegion splashTextureRegion;
 	
@@ -71,7 +74,7 @@ public class SceneManager {
 		this.engine = engine;
 		this.camera = camera;
 		section = 1;
-		
+		th = TagHandler.getInstance();
 	}
 
 	//Method loads all of the splash scene resources
@@ -196,7 +199,25 @@ public class SceneManager {
 		
 		//Victory and defeat textures
 		
+		//Load all 4 on & off buttons
+		BitmapTextureAtlas[] buttonOnTextureAtlases = new BitmapTextureAtlas[4];
+		ITextureRegion[] buttonOnTextures = new ITextureRegion[4];
 		
+		BitmapTextureAtlas[] buttonOffTextureAtlases = new BitmapTextureAtlas[4];
+		ITextureRegion[] buttonOffTextures = new ITextureRegion[4];
+		
+		for(int i = 0; i < 4; i ++)
+		{
+			buttonOnTextureAtlases[i] = new BitmapTextureAtlas(activity.getTextureManager(), 90, 90, TextureOptions.DEFAULT);
+			buttonOnTextures[i] = BitmapTextureAtlasTextureRegionFactory.createFromAsset(buttonOnTextureAtlases[i], activity, "button_on_" + (i + 1) +".png", 0, 0);
+			buttonOnTextureAtlases[i].load();
+			
+			buttonOffTextureAtlases[i] = new BitmapTextureAtlas(activity.getTextureManager(), 90, 90, TextureOptions.DEFAULT);
+			buttonOffTextures[i] = BitmapTextureAtlasTextureRegionFactory.createFromAsset(buttonOffTextureAtlases[i], activity, "button_off_" + (i + 1) +".png", 0, 0);
+			buttonOffTextureAtlases[i].load();
+		}
+		
+		/*
 		BitmapTextureAtlas buttonOnTextureAtlas = new BitmapTextureAtlas(activity.getTextureManager(), 90, 90, TextureOptions.DEFAULT);
 		ITextureRegion buttonOnTexture = BitmapTextureAtlasTextureRegionFactory.createFromAsset(buttonOnTextureAtlas, activity, "button_on.png", 0, 0);
 		buttonOnTextureAtlas.load();
@@ -228,9 +249,34 @@ public class SceneManager {
 		BitmapTextureAtlas button4OffTextureAtlas = new BitmapTextureAtlas(activity.getTextureManager(), 90, 90, TextureOptions.DEFAULT);
 		ITextureRegion button4OffTexture = BitmapTextureAtlasTextureRegionFactory.createFromAsset(button4OffTextureAtlas, activity, "button_off_4.png", 0, 0);
 		button4OffTextureAtlas.load();
+		*/
+		
 		//HUGE-ASS LIST OF BUTTONS
 		// -- ARMORY BUTTONS --
 		//Button 1 : Identifier "a1"
+		
+		final Sprite[] buttonsOn = new Sprite[16];
+		final Sprite[] buttonsOff = new Sprite[16];
+		
+		for(int i = 0;  i < 16; i++)
+		{			
+			buttonsOff[i] = new Sprite(0, 0, buttonOffTextures[i/4], activity.getVertexBufferObjectManager());
+			buttonsOff[i].setVisible(false);
+			
+			buttonsOn[i] =  this.onButtonFactory(buttonOnTextures[i/4],i,buttonsOff);/*new Sprite(0, 0, buttonOnTextures[i/4], activity.getVertexBufferObjectManager()) {
+				@Override
+				public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY) {
+					if(pSceneTouchEvent.isActionDown()) {
+						this.setVisible(!this.isVisible());
+						buttonsOff[numbers[h]].setVisible(!this.isVisible());
+						setToggled(identifiers[h]);
+					}
+					return true;
+				}
+			};*/
+		}
+		
+		/*
 		final Sprite buttonOff1 = new Sprite(0, 0, buttonOffTexture, activity.getVertexBufferObjectManager()) {
 			@Override
 			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY) {
@@ -540,6 +586,7 @@ public class SceneManager {
 			return true;
 			}
 		};
+		*/
 		
 		//Buttons end
 		
@@ -562,6 +609,26 @@ public class SceneManager {
 				
 				
 				/////
+				
+				for(int i = 0; i < 16; i++)
+				{
+					int posX = 2000;
+					int posY = 2000;
+					
+					if(i < 4)//So only the first 4 buttons show
+					{
+						if(i%2 == 0) posX = 72;
+						else posX = 300;
+						
+						if(i <= 1) posY = 420;
+						else posY = 590;
+					}
+					
+					buttonsOn[i].setPosition(posX,posY);
+					buttonsOff[i].setPosition(posX,posY);
+				}
+				
+				/*
 				//Button 1
 				buttonOn1.setPosition(72, 40 + 380);
 				buttonOff1.setPosition(72, 40 + 380);
@@ -611,6 +678,7 @@ public class SceneManager {
 				//Button16
 				buttonOn16.setPosition(2000, 40 + 550);
 				buttonOff16.setPosition(2000, 40 + 550);
+				*/
 				return true;
 			}
 		};
@@ -629,8 +697,28 @@ public class SceneManager {
 				button3Text.setText(gm.getButtonTextByIdentifier("c3"));
 				button4Text.setText(gm.getButtonTextByIdentifier("c4"));
 				
+				for(int i = 0; i < 16; i++)
+				{
+					int posX = 2000;
+					int posY = 2000;
+					
+					if(i >= 4 && i < 8)//So only the first 4 buttons show
+					{
+						if(i%2 == 0) posX = 72;
+						else posX = 300;
+						
+						if(i <= 5) posY = 420;
+						else posY = 590;
+					}
+					
+					buttonsOn[i].setPosition(posX,posY);
+					buttonsOff[i].setPosition(posX,posY);
+					
+				}
+				
 				//Hide all the other buttons
 				//Button 1
+				/*
 				buttonOn1.setPosition(2000, 40 + 380);
 				buttonOff1.setPosition(2000, 40 + 380);
 				//Button 2
@@ -680,6 +768,7 @@ public class SceneManager {
 				//Button16
 				buttonOn16.setPosition(2000, 40 + 550);
 				buttonOff16.setPosition(2000, 40 + 550);
+				*/
 				return true;
 			}
 		};
@@ -698,8 +787,27 @@ public class SceneManager {
 				button3Text.setText(gm.getButtonTextByIdentifier("k3"));
 				button4Text.setText(gm.getButtonTextByIdentifier("k4"));
 				
+				for(int i = 0; i < 16; i++)
+				{
+					int posX = 2000;
+					int posY = 2000;
+					
+					if(i >= 8 && i < 12)//So only the first 4 buttons show
+					{
+						if(i%2 == 0) posX = 72;
+						else posX = 300;
+						
+						if(i <= 9) posY = 420;
+						else posY = 590;
+					}
+					
+					buttonsOn[i].setPosition(posX,posY);
+					buttonsOff[i].setPosition(posX,posY);
+					
+				}
+				
 				//Button 1
-				buttonOn1.setPosition(2000, 40 + 380);
+				/*buttonOn1.setPosition(2000, 40 + 380);
 				buttonOff1.setPosition(2000, 40 + 380);
 				//Button 2
 				buttonOn2.setPosition(2000, 40 + 380);
@@ -749,7 +857,7 @@ public class SceneManager {
 				//Button16
 				buttonOn16.setPosition(2000, 40 + 550);
 				buttonOff16.setPosition(2000, 40 + 550);
-				
+				*/
 				
 				return true;
 			}
@@ -769,8 +877,27 @@ public class SceneManager {
 				button3Text.setText(gm.getButtonTextByIdentifier("n3"));
 				button4Text.setText(gm.getButtonTextByIdentifier("n4"));
 				
+				for(int i = 0; i < 16; i++)
+				{
+					int posX = 2000;
+					int posY = 2000;
+					
+					if(i >= 12)//So only the first 4 buttons show
+					{
+						if(i%2 == 0) posX = 72;
+						else posX = 300;
+						
+						if(i <= 13) posY = 420;
+						else posY = 590;
+					}
+					
+					buttonsOn[i].setPosition(posX,posY);
+					buttonsOff[i].setPosition(posX,posY);
+					
+				}
+				
 				//Button 1
-				buttonOn1.setPosition(2000, 40 + 380);
+				/*buttonOn1.setPosition(2000, 40 + 380);
 				buttonOff1.setPosition(2000, 40 + 380);
 				//Button 2
 				buttonOn2.setPosition(2000, 40 + 380);
@@ -820,7 +947,7 @@ public class SceneManager {
 				//Button16
 				buttonOn16.setPosition(300, 40 + 550);
 				buttonOff16.setPosition(300, 40 + 550);
-				
+				*/
 				
 				
 				
@@ -897,7 +1024,8 @@ public class SceneManager {
 		//button1Text.setWidth(100);
 		//Buttons tags
 		//buttonOn1.setTag(10);
-		buttonOff1.setVisible(false);
+		
+		/*buttonOff1.setVisible(false);
 		//buttonOff1.setTag(11);
 		
 		//buttonOn2.setTag(12);
@@ -926,6 +1054,7 @@ public class SceneManager {
 		buttonOff14.setVisible(false);
 		buttonOff15.setVisible(false);
 		buttonOff16.setVisible(false);
+		*/
 		
 		armory.setPosition(0, 0);
 		communication.setPosition(240, 0);
@@ -938,8 +1067,27 @@ public class SceneManager {
 		loseSplash.setPosition(2000,2000);
 		victorySplash.setPosition(2000,2000);
 		
+		for(int i = 0; i < 16; i++)
+		{
+			int posX = 2000;
+			int posY = 2000;
+			
+			if(i < 4)//So only the first 4 buttons show
+			{
+				if(i%2 == 0) posX = 72;
+				else posX = 300;
+				
+				if(i <= 1) posY = 420;
+				else posY = 590;
+			}
+			
+			buttonsOn[i].setPosition(posX,posY);
+			buttonsOff[i].setPosition(posX,posY);
+		}
+		
 		//Buttons positions - initials. Only from 1 to 4 are shown at the start, everything else is anywhere
 		//Button 1
+		/*
 		buttonOn1.setPosition(72, 40 + 380);
 		buttonOff1.setPosition(72, 40 + 380);
 		//Button 2
@@ -988,7 +1136,7 @@ public class SceneManager {
 		//Button16
 		buttonOn16.setPosition(2000, 40 + 550);
 		buttonOff16.setPosition(2000, 40 + 550);
-		
+		*/
 		
 		mainGameScene.registerTouchArea(armory);
 		mainGameScene.setTouchAreaBindingOnActionDownEnabled(true);
@@ -1011,6 +1159,17 @@ public class SceneManager {
 		mainGameScene.attachChild(buttonsPanel);
 		
 		//Buttons are attached here
+		
+		for(int i = 0; i<16; i++)
+		{
+			mainGameScene.registerTouchArea(buttonsOn[i]);
+			mainGameScene.setTouchAreaBindingOnActionDownEnabled(true);
+			mainGameScene.attachChild(buttonsOn[i]);
+			
+			mainGameScene.attachChild(buttonsOff[i]);
+		}
+		
+		/*
 		//Button 1
 		mainGameScene.registerTouchArea(buttonOn1);
 		mainGameScene.setTouchAreaBindingOnActionDownEnabled(true);
@@ -1145,6 +1304,7 @@ public class SceneManager {
 		mainGameScene.registerTouchArea(buttonOff16);
 		mainGameScene.setTouchAreaBindingOnActionDownEnabled(true);
 		mainGameScene.attachChild(buttonOff16);
+		*/
 		
 		//Print the texts and the background
 		//We create the rectangles
@@ -1231,6 +1391,30 @@ public class SceneManager {
 	{
 		//this.button1Text.setText(this.button1Text.getText() + "a");
 		this.gm.pressButton(buttonIdentifier);
+	}
+	
+	public Sprite onButtonFactory(ITextureRegion texture, final int i, final Sprite[] buttonsOff)
+	{
+		final String identifier;
+		
+		if(i < 4) identifier = "a" + (i%4 + 1);
+		else if(i < 8) identifier = "c" + (i%4 + 1);
+		else if(i < 12) identifier = "k" + (i%4 + 1);
+		else identifier = "n" + (i%4 + 1);
+		
+		Sprite button = new Sprite(0, 0, texture, activity.getVertexBufferObjectManager()) {
+			@Override
+			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY) {
+				if(pSceneTouchEvent.isActionDown()) {
+					this.setVisible(!this.isVisible());
+					buttonsOff[i].setVisible(!this.isVisible());
+					setToggled(identifier);
+				}
+				return true;
+			}
+		};
+		
+		return button;
 	}
 
 
