@@ -1,4 +1,4 @@
-package com.rocketscience;
+package iic3686.rocketscience;
 
 public class Order {
 	//Order variables

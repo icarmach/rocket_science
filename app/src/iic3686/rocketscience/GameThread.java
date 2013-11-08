@@ -1,4 +1,4 @@
-package com.rocketscience;
+package iic3686.rocketscience;
 
 import org.andengine.entity.IEntity;
 import org.andengine.entity.primitive.Rectangle;

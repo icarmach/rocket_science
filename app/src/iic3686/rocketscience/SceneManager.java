@@ -1,4 +1,4 @@
-package com.rocketscience;
+package iic3686.rocketscience;
 
 import org.andengine.engine.Engine;
 import org.andengine.engine.camera.Camera;

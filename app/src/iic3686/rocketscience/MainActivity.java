@@ -1,4 +1,6 @@
-package com.rocketscience;
+package iic3686.rocketscience;
+
+import iic3686.rocketscience.SceneManager.SceneType;
 
 import org.andengine.engine.camera.Camera;
 import org.andengine.engine.handler.timer.ITimerCallback;
@@ -15,7 +17,6 @@ import org.andengine.ui.activity.BaseGameActivity;
 
 import android.graphics.Typeface;
 
-import com.rocketscience.SceneManager.SceneType;
 
 public class MainActivity extends BaseGameActivity {
 	private final int CAMERA_WIDTH = 480;

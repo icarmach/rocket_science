@@ -1,4 +1,4 @@
-package com.rocketscience;
+package iic3686.rocketscience;
 
 import java.util.HashMap;
 import java.util.Map;
