@@ -233,16 +233,48 @@ public class SceneManager {
 		//KNOB TEST
 		BitmapTextureAtlas knobMap = new BitmapTextureAtlas(activity.getTextureManager(), 90, 90, TextureOptions.DEFAULT);
 		ITextureRegion knobTexture = BitmapTextureAtlasTextureRegionFactory.createFromAsset(knobMap, activity, "knob.png", 0, 0);
-		
+		knobMap.load();
 		final Sprite knob = new Sprite(0, 0, knobTexture, activity.getVertexBufferObjectManager()){
 			@Override
 			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY) {
-			
-				pSceneTouchEvent.getX();
-				
+				float tx = pSceneTouchEvent.getX() - (this.getX() + this.getWidth() / 2);
+				float ty = pSceneTouchEvent.getY() - (this.getY());
+				double  Radius = Math.atan2(ty,tx);
+				double Angle = Radius * 180 / Math.PI;
+				this.setRotation((float) Angle);
+
+				//button1Text.setText("" + (int)((180 + Angle) / 36));
 				return true;
 			}
 		};
+		//knob.setPosition(150, 420);
+		
+		//Slider Test
+		BitmapTextureAtlas slider1atlas = new BitmapTextureAtlas(activity.getTextureManager(), 250, 25, TextureOptions.DEFAULT);
+		ITextureRegion slider1Texture = BitmapTextureAtlasTextureRegionFactory.createFromAsset(slider1atlas, activity, "slider1.png", 0, 0);
+		slider1atlas.load();
+		final Sprite slider1 = new Sprite(0, 0, slider1Texture, activity.getVertexBufferObjectManager());
+		slider1.setPosition(150,420);
+		
+		BitmapTextureAtlas slider2atlas = new BitmapTextureAtlas(activity.getTextureManager(), 40, 40, TextureOptions.DEFAULT);
+		ITextureRegion slider2Texture = BitmapTextureAtlasTextureRegionFactory.createFromAsset(slider2atlas, activity, "slider2.png", 0, 0);
+		slider2atlas.load();
+		final Sprite slider2 = new Sprite(0, 0, slider2Texture, activity.getVertexBufferObjectManager()){
+			@Override
+			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY) {
+				if(pSceneTouchEvent.getX() < slider1.getX() + slider1.getWidth() - this.getWidth() && pSceneTouchEvent.getX() > slider1.getX())
+				{
+					this.setPosition(pSceneTouchEvent.getX(), this.getY());
+					
+					float value = (pSceneTouchEvent.getX() - slider1.getX()) / slider1.getWidth() * 11;
+					//button1Text.setText("" + (int) value);
+				}
+				return true;
+			}
+		};
+		slider2.setPosition(150,420 + slider1.getHeight()/2 - slider2.getHeight() / 2);
+		
+		
 		
 		//Top options
 		//Armory Button
@@ -465,6 +497,7 @@ public class SceneManager {
 				else posY = 590;
 			}
 			
+			
 			buttonsOn[i].setPosition(posX,posY);
 			buttonsOff[i].setPosition(posX,posY);
 		}
@@ -489,8 +522,17 @@ public class SceneManager {
 		mainGameScene.setTouchAreaBindingOnActionDownEnabled(true);
 		mainGameScene.attachChild(buttonsPanel);
 		
-		//Buttons are attached here
+		//Knob section
+		//mainGameScene.registerTouchArea(knob);
+		//mainGameScene.setTouchAreaBindingOnActionDownEnabled(true);
+		//mainGameScene.attachChild(knob);
 		
+		//Slider Section
+		//mainGameScene.attachChild(slider1);
+		//mainGameScene.registerTouchArea(slider2);
+		//mainGameScene.attachChild(slider2);
+		
+		//Buttons are attached here
 		for(int i = 0; i<16; i++)
 		{
 			mainGameScene.registerTouchArea(buttonsOn[i]);
