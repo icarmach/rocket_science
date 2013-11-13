@@ -105,7 +105,7 @@ public class SceneManager {
 		splashScene.setBackground(new Background(0, 0, 0));
 		Sprite splash = new Sprite(0, 0, splashTextureRegion, activity.getVertexBufferObjectManager())
 		{
-			@Override
+			
 			protected void preDraw(GLState pGLState, Camera pCamera)
 			{
 				super.preDraw(pGLState, pCamera);
@@ -217,44 +217,7 @@ public class SceneManager {
 			buttonOffTextureAtlases[i].load();
 		}
 		
-		/*
-		BitmapTextureAtlas buttonOnTextureAtlas = new BitmapTextureAtlas(activity.getTextureManager(), 90, 90, TextureOptions.DEFAULT);
-		ITextureRegion buttonOnTexture = BitmapTextureAtlasTextureRegionFactory.createFromAsset(buttonOnTextureAtlas, activity, "button_on.png", 0, 0);
-		buttonOnTextureAtlas.load();
-		
-		BitmapTextureAtlas buttonOffTextureAtlas = new BitmapTextureAtlas(activity.getTextureManager(), 90, 90, TextureOptions.DEFAULT);
-		ITextureRegion buttonOffTexture = BitmapTextureAtlasTextureRegionFactory.createFromAsset(buttonOffTextureAtlas, activity, "button_off.png", 0, 0);
-		buttonOffTextureAtlas.load();
-		
-		BitmapTextureAtlas button2OnTextureAtlas = new BitmapTextureAtlas(activity.getTextureManager(), 90, 90, TextureOptions.DEFAULT);
-		ITextureRegion button2OnTexture = BitmapTextureAtlasTextureRegionFactory.createFromAsset(button2OnTextureAtlas, activity, "button_on_2.png", 0, 0);
-		button2OnTextureAtlas.load();
-		
-		BitmapTextureAtlas button2OffTextureAtlas = new BitmapTextureAtlas(activity.getTextureManager(), 90, 90, TextureOptions.DEFAULT);
-		ITextureRegion button2OffTexture = BitmapTextureAtlasTextureRegionFactory.createFromAsset(button2OffTextureAtlas, activity, "button_off_2.png", 0, 0);
-		button2OffTextureAtlas.load();
-		
-		BitmapTextureAtlas button3OnTextureAtlas = new BitmapTextureAtlas(activity.getTextureManager(), 90, 90, TextureOptions.DEFAULT);
-		ITextureRegion button3OnTexture = BitmapTextureAtlasTextureRegionFactory.createFromAsset(button3OnTextureAtlas, activity, "button_on_3.png", 0, 0);
-		button3OnTextureAtlas.load();
-		
-		BitmapTextureAtlas button3OffTextureAtlas = new BitmapTextureAtlas(activity.getTextureManager(), 90, 90, TextureOptions.DEFAULT);
-		ITextureRegion button3OffTexture = BitmapTextureAtlasTextureRegionFactory.createFromAsset(button3OffTextureAtlas, activity, "button_off_3.png", 0, 0);
-		button3OffTextureAtlas.load();
-		
-		BitmapTextureAtlas button4OnTextureAtlas = new BitmapTextureAtlas(activity.getTextureManager(), 90, 90, TextureOptions.DEFAULT);
-		ITextureRegion button4OnTexture = BitmapTextureAtlasTextureRegionFactory.createFromAsset(button4OnTextureAtlas, activity, "button_on_4.png", 0, 0);
-		button4OnTextureAtlas.load();
-		
-		BitmapTextureAtlas button4OffTextureAtlas = new BitmapTextureAtlas(activity.getTextureManager(), 90, 90, TextureOptions.DEFAULT);
-		ITextureRegion button4OffTexture = BitmapTextureAtlasTextureRegionFactory.createFromAsset(button4OffTextureAtlas, activity, "button_off_4.png", 0, 0);
-		button4OffTextureAtlas.load();
-		*/
-		
 		//HUGE-ASS LIST OF BUTTONS
-		// -- ARMORY BUTTONS --
-		//Button 1 : Identifier "a1"
-		
 		final Sprite[] buttonsOn = new Sprite[16];
 		final Sprite[] buttonsOff = new Sprite[16];
 		
@@ -263,332 +226,23 @@ public class SceneManager {
 			buttonsOff[i] = new Sprite(0, 0, buttonOffTextures[i/4], activity.getVertexBufferObjectManager());
 			buttonsOff[i].setVisible(false);
 			
-			buttonsOn[i] =  this.onButtonFactory(buttonOnTextures[i/4],i,buttonsOff);/*new Sprite(0, 0, buttonOnTextures[i/4], activity.getVertexBufferObjectManager()) {
-				@Override
-				public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY) {
-					if(pSceneTouchEvent.isActionDown()) {
-						this.setVisible(!this.isVisible());
-						buttonsOff[numbers[h]].setVisible(!this.isVisible());
-						setToggled(identifiers[h]);
-					}
-					return true;
-				}
-			};*/
+			buttonsOn[i] =  this.onButtonFactory(buttonOnTextures[i/4],i,buttonsOff);
 		}
-		
-		/*
-		final Sprite buttonOff1 = new Sprite(0, 0, buttonOffTexture, activity.getVertexBufferObjectManager()) {
-			@Override
-			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY) {
-				//this.setVisible(!this.isVisible());
-				//button1.buttonText = "WHAT";
-				return true;
-			}
-		};
-		
-		final Sprite buttonOn1 = new Sprite(0, 0, buttonOnTexture, activity.getVertexBufferObjectManager()) {
-			@Override
-			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY) {
-				if(pSceneTouchEvent.isActionDown()) {
-					this.setVisible(!this.isVisible());
-					buttonOff1.setVisible(!buttonOff1.isVisible());
-					setToggled("a1");
-				}
-				return true;
-			}
-		};
-		//Button 2 - "a2"
-		final Sprite buttonOff2 = new Sprite(0, 0, buttonOffTexture, activity.getVertexBufferObjectManager()) {
-			@Override
-			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY) {
-				return true;
-			}
-		};
-		
-		final Sprite buttonOn2 = new Sprite(0, 0, buttonOnTexture, activity.getVertexBufferObjectManager()) {
-			@Override
-			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY) {
-				if(pSceneTouchEvent.isActionDown()) {
-					this.setVisible(!this.isVisible());
-					buttonOff2.setVisible(!buttonOff2.isVisible());
-					setToggled("a2");
-				}
-				return true;
-			}
-		};
-		//Button 3 - "a3"
-		final Sprite buttonOff3 = new Sprite(0, 0, buttonOffTexture, activity.getVertexBufferObjectManager()) {
-			@Override
-			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY) {
-						return true;
-					}
-		};
-				
-		final Sprite buttonOn3 = new Sprite(0, 0, buttonOnTexture, activity.getVertexBufferObjectManager()) {
-			@Override
-			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY) {
-				if(pSceneTouchEvent.isActionDown()) {
-					this.setVisible(!this.isVisible());
-					buttonOff3.setVisible(!buttonOff3.isVisible());
-					setToggled("a3");
-				}
-			return true;
-					}
-		};
-		//Button 4 - "a4"
-		final Sprite buttonOff4 = new Sprite(0, 0, buttonOffTexture, activity.getVertexBufferObjectManager()) {
-			@Override
-			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY) {
-						return true;
-					}
-		};
-						
-		final Sprite buttonOn4 = new Sprite(0, 0, buttonOnTexture, activity.getVertexBufferObjectManager()) {
-			@Override
-			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY) {
-				if(pSceneTouchEvent.isActionDown()) {
-							this.setVisible(!this.isVisible());
-							buttonOff4.setVisible(!buttonOff4.isVisible());
-							setToggled("a4");
-				}
-			return true;
-			}
-		};
-		
-		
-		// -- COMMUNICATIONS BUTTONS --
-		final Sprite buttonOff5 = new Sprite(0, 0, button2OffTexture, activity.getVertexBufferObjectManager()) {
-			@Override
-			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY) {
-				return true;
-			}
-		};
-		
-		final Sprite buttonOn5 = new Sprite(0, 0, button2OnTexture, activity.getVertexBufferObjectManager()) {
-			@Override
-			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY) {
-				if(pSceneTouchEvent.isActionDown()) {
-					this.setVisible(!this.isVisible());
-					buttonOff5.setVisible(!buttonOff5.isVisible());
-					setToggled("c1");
-				}
-				return true;
-			}
-		};
-		//Button 6 - "c2"
-		final Sprite buttonOff6 = new Sprite(0, 0, button2OffTexture, activity.getVertexBufferObjectManager()) {
-			@Override
-			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY) {
-				return true;
-			}
-		};
-		
-		final Sprite buttonOn6 = new Sprite(0, 0, button2OnTexture, activity.getVertexBufferObjectManager()) {
-			@Override
-			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY) {
-				if(pSceneTouchEvent.isActionDown()) {
-					this.setVisible(!this.isVisible());
-					buttonOff6.setVisible(!buttonOff6.isVisible());
-					setToggled("c2");
-				}
-				return true;
-			}
-		};
-		//Button 7 - "c3"
-		final Sprite buttonOff7 = new Sprite(0, 0, button2OffTexture, activity.getVertexBufferObjectManager()) {
-			@Override
-			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY) {
-						return true;
-					}
-		};
-				
-		final Sprite buttonOn7 = new Sprite(0, 0, button2OnTexture, activity.getVertexBufferObjectManager()) {
-			@Override
-			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY) {
-				if(pSceneTouchEvent.isActionDown()) {
-					this.setVisible(!this.isVisible());
-					buttonOff7.setVisible(!buttonOff7.isVisible());
-					setToggled("c3");
-				}
-			return true;
-					}
-		};
-		//Button 8 - "c4"
-		final Sprite buttonOff8 = new Sprite(0, 0, button2OffTexture, activity.getVertexBufferObjectManager()) {
-			@Override
-			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY) {
-						return true;
-					}
-		};
-						
-		final Sprite buttonOn8 = new Sprite(0, 0, button2OnTexture, activity.getVertexBufferObjectManager()) {
-			@Override
-			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY) {
-				if(pSceneTouchEvent.isActionDown()) {
-							this.setVisible(!this.isVisible());
-							buttonOff8.setVisible(!buttonOff8.isVisible());
-							setToggled("c4");
-				}
-			return true;
-			}
-		};
-		
-		// -- KITCHEN --
-		final Sprite buttonOff9 = new Sprite(0, 0, button3OffTexture, activity.getVertexBufferObjectManager()) {
-			@Override
-			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY) {
-				return true;
-			}
-		};
-		
-		final Sprite buttonOn9 = new Sprite(0, 0, button3OnTexture, activity.getVertexBufferObjectManager()) {
-			@Override
-			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY) {
-				if(pSceneTouchEvent.isActionDown()) {
-					this.setVisible(!this.isVisible());
-					buttonOff9.setVisible(!buttonOff9.isVisible());
-					setToggled("k1");
-				}
-				return true;
-			}
-		};
-		//Button 10 - "k2"
-		final Sprite buttonOff10 = new Sprite(0, 0, button3OffTexture, activity.getVertexBufferObjectManager()) {
-			@Override
-			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY) {
-				return true;
-			}
-		};
-		
-		final Sprite buttonOn10 = new Sprite(0, 0, button3OnTexture, activity.getVertexBufferObjectManager()) {
-			@Override
-			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY) {
-				if(pSceneTouchEvent.isActionDown()) {
-					this.setVisible(!this.isVisible());
-					buttonOff10.setVisible(!buttonOff10.isVisible());
-					setToggled("k2");
-				}
-				return true;
-			}
-		};
-		//Button 11 - "k3"
-		final Sprite buttonOff11 = new Sprite(0, 0, button3OffTexture, activity.getVertexBufferObjectManager()) {
-			@Override
-			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY) {
-						return true;
-					}
-		};
-				
-		final Sprite buttonOn11 = new Sprite(0, 0, button3OnTexture, activity.getVertexBufferObjectManager()) {
-			@Override
-			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY) {
-				if(pSceneTouchEvent.isActionDown()) {
-					this.setVisible(!this.isVisible());
-					buttonOff11.setVisible(!buttonOff11.isVisible());
-					setToggled("k3");
-				}
-			return true;
-					}
-		};
-		//Button 12 - "k4"
-		final Sprite buttonOff12 = new Sprite(0, 0, button3OffTexture, activity.getVertexBufferObjectManager()) {
-			@Override
-			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY) {
-						return true;
-					}
-		};
-						
-		final Sprite buttonOn12 = new Sprite(0, 0, button3OnTexture, activity.getVertexBufferObjectManager()) {
-			@Override
-			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY) {
-				if(pSceneTouchEvent.isActionDown()) {
-							this.setVisible(!this.isVisible());
-							buttonOff12.setVisible(!buttonOff12.isVisible());
-							setToggled("k4");
-				}
-			return true;
-			}
-		};
-		
-		// -- NAVIGATION --
-		final Sprite buttonOff13 = new Sprite(0, 0, button4OffTexture, activity.getVertexBufferObjectManager()) {
-			@Override
-			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY) {
-				return true;
-			}
-		};
-		
-		final Sprite buttonOn13 = new Sprite(0, 0, button4OnTexture, activity.getVertexBufferObjectManager()) {
-			@Override
-			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY) {
-				if(pSceneTouchEvent.isActionDown()) {
-					this.setVisible(!this.isVisible());
-					buttonOff13.setVisible(!buttonOff13.isVisible());
-					setToggled("n1");
-				}
-				return true;
-			}
-		};
-		//Button 14 - "n2"
-		final Sprite buttonOff14 = new Sprite(0, 0, button4OffTexture, activity.getVertexBufferObjectManager()) {
-			@Override
-			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY) {
-				return true;
-			}
-		};
-		
-		final Sprite buttonOn14 = new Sprite(0, 0, button4OnTexture, activity.getVertexBufferObjectManager()) {
-			@Override
-			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY) {
-				if(pSceneTouchEvent.isActionDown()) {
-					this.setVisible(!this.isVisible());
-					buttonOff14.setVisible(!buttonOff14.isVisible());
-					setToggled("n2");
-				}
-				return true;
-			}
-		};
-		//Button 15 - "n3"
-		final Sprite buttonOff15 = new Sprite(0, 0, button4OffTexture, activity.getVertexBufferObjectManager()) {
-			@Override
-			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY) {
-						return true;
-					}
-		};
-				
-		final Sprite buttonOn15 = new Sprite(0, 0, button4OnTexture, activity.getVertexBufferObjectManager()) {
-			@Override
-			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY) {
-				if(pSceneTouchEvent.isActionDown()) {
-					this.setVisible(!this.isVisible());
-					buttonOff15.setVisible(!buttonOff15.isVisible());
-					setToggled("n3");
-				}
-			return true;
-					}
-		};
-		//Button 16 - "n4"
-		final Sprite buttonOff16 = new Sprite(0, 0, button4OffTexture, activity.getVertexBufferObjectManager()) {
-			@Override
-			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY) {
-						return true;
-					}
-		};
-						
-		final Sprite buttonOn16 = new Sprite(0, 0, button4OnTexture, activity.getVertexBufferObjectManager()) {
-			@Override
-			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY) {
-				if(pSceneTouchEvent.isActionDown()) {
-							this.setVisible(!this.isVisible());
-							buttonOff16.setVisible(!buttonOff16.isVisible());
-							setToggled("n4");
-				}
-			return true;
-			}
-		};
-		*/
-		
 		//Buttons end
+		
+		//KNOB TEST
+		BitmapTextureAtlas knobMap = new BitmapTextureAtlas(activity.getTextureManager(), 90, 90, TextureOptions.DEFAULT);
+		ITextureRegion knobTexture = BitmapTextureAtlasTextureRegionFactory.createFromAsset(knobMap, activity, "knob.png", 0, 0);
+		
+		final Sprite knob = new Sprite(0, 0, knobTexture, activity.getVertexBufferObjectManager()){
+			@Override
+			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY) {
+			
+				pSceneTouchEvent.getX();
+				
+				return true;
+			}
+		};
 		
 		//Top options
 		//Armory Button
@@ -627,58 +281,6 @@ public class SceneManager {
 					buttonsOn[i].setPosition(posX,posY);
 					buttonsOff[i].setPosition(posX,posY);
 				}
-				
-				/*
-				//Button 1
-				buttonOn1.setPosition(72, 40 + 380);
-				buttonOff1.setPosition(72, 40 + 380);
-				//Button 2
-				buttonOn2.setPosition(300, 40 + 380);
-				buttonOff2.setPosition(300, 40 + 380);
-				//Button 3
-				buttonOn3.setPosition(72, 40 + 550);
-				buttonOff3.setPosition(72, 40 + 550);
-				//Button 4
-				buttonOn4.setPosition(300, 40 + 550);
-				buttonOff4.setPosition(300, 40 + 550);
-				
-				//Hide all others
-				buttonOn5.setPosition(2000, 40 + 380);
-				buttonOff5.setPosition(2000, 40 + 380);
-				//Button 6
-				buttonOn6.setPosition(2000, 40 + 380);
-				buttonOff6.setPosition(2000, 40 + 380);
-				//Button7
-				buttonOn7.setPosition(2000, 40 + 550);
-				buttonOff7.setPosition(2000, 40 + 550);
-				//Button 8
-				buttonOn8.setPosition(2000, 40 + 550);
-				buttonOff8.setPosition(2000, 40 + 550);
-				
-				buttonOn9.setPosition(2000, 40 + 380);
-				buttonOff9.setPosition(2000, 40 + 380);
-				//Button 10
-				buttonOn10.setPosition(2000, 40 + 380);
-				buttonOff10.setPosition(2000, 40 + 380);
-				//Button11
-				buttonOn11.setPosition(2000, 40 + 550);
-				buttonOff11.setPosition(2000, 40 + 550);
-				//Button 12
-				buttonOn12.setPosition(2000, 40 + 550);
-				buttonOff12.setPosition(2000, 40 + 550);
-				//
-				buttonOn13.setPosition(2000, 40 + 550);
-				buttonOff13.setPosition(2000, 40 + 550);
-				
-				buttonOn14.setPosition(2000, 40 + 380);
-				buttonOff14.setPosition(2000, 40 + 380);
-				//Button 15
-				buttonOn15.setPosition(2000, 40 + 380);
-				buttonOff15.setPosition(2000, 40 + 380);
-				//Button16
-				buttonOn16.setPosition(2000, 40 + 550);
-				buttonOff16.setPosition(2000, 40 + 550);
-				*/
 				return true;
 			}
 		};
@@ -715,60 +317,6 @@ public class SceneManager {
 					buttonsOff[i].setPosition(posX,posY);
 					
 				}
-				
-				//Hide all the other buttons
-				//Button 1
-				/*
-				buttonOn1.setPosition(2000, 40 + 380);
-				buttonOff1.setPosition(2000, 40 + 380);
-				//Button 2
-				buttonOn2.setPosition(2000, 40 + 380);
-				buttonOff2.setPosition(2000, 40 + 380);
-				//Button 3
-				buttonOn3.setPosition(2000, 40 + 550);
-				buttonOff3.setPosition(2000, 40 + 550);
-				//Button 4
-				buttonOn4.setPosition(2000, 40 + 550);
-				buttonOff4.setPosition(2000, 40 + 550);
-				
-				//Hide all others
-				buttonOn5.setPosition(72, 40 + 380);
-				buttonOff5.setPosition(72, 40 + 380);
-				//Button 6
-				buttonOn6.setPosition(300, 40 + 380);
-				buttonOff6.setPosition(300, 40 + 380);
-				//Button7
-				buttonOn7.setPosition(72, 40 + 550);
-				buttonOff7.setPosition(72, 40 + 550);
-				//Button 8
-				buttonOn8.setPosition(300, 40 + 550);
-				buttonOff8.setPosition(300, 40 + 550);
-				
-				
-				buttonOn9.setPosition(2000, 40 + 380);
-				buttonOff9.setPosition(2000, 40 + 380);
-				//Button 10
-				buttonOn10.setPosition(2000, 40 + 380);
-				buttonOff10.setPosition(2000, 40 + 380);
-				//Button11
-				buttonOn11.setPosition(2000, 40 + 550);
-				buttonOff11.setPosition(2000, 40 + 550);
-				//Button 12
-				buttonOn12.setPosition(2000, 40 + 550);
-				buttonOff12.setPosition(2000, 40 + 550);
-				//
-				buttonOn13.setPosition(2000, 40 + 550);
-				buttonOff13.setPosition(2000, 40 + 550);
-				
-				buttonOn14.setPosition(2000, 40 + 380);
-				buttonOff14.setPosition(2000, 40 + 380);
-				//Button 15
-				buttonOn15.setPosition(2000, 40 + 380);
-				buttonOff15.setPosition(2000, 40 + 380);
-				//Button16
-				buttonOn16.setPosition(2000, 40 + 550);
-				buttonOff16.setPosition(2000, 40 + 550);
-				*/
 				return true;
 			}
 		};
@@ -805,60 +353,6 @@ public class SceneManager {
 					buttonsOff[i].setPosition(posX,posY);
 					
 				}
-				
-				//Button 1
-				/*buttonOn1.setPosition(2000, 40 + 380);
-				buttonOff1.setPosition(2000, 40 + 380);
-				//Button 2
-				buttonOn2.setPosition(2000, 40 + 380);
-				buttonOff2.setPosition(2000, 40 + 380);
-				//Button 3
-				buttonOn3.setPosition(2000, 40 + 550);
-				buttonOff3.setPosition(2000, 40 + 550);
-				//Button 4
-				buttonOn4.setPosition(2000, 40 + 550);
-				buttonOff4.setPosition(2000, 40 + 550);
-				
-				//Hide all others
-				buttonOn5.setPosition(2000, 40 + 380);
-				buttonOff5.setPosition(2000, 40 + 380);
-				//Button 6
-				buttonOn6.setPosition(2000, 40 + 380);
-				buttonOff6.setPosition(2000, 40 + 380);
-				//Button7
-				buttonOn7.setPosition(2000, 40 + 550);
-				buttonOff7.setPosition(2000, 40 + 550);
-				//Button 8
-				buttonOn8.setPosition(2000, 40 + 550);
-				buttonOff8.setPosition(2000, 40 + 550);
-				
-				//////
-				buttonOn9.setPosition(72, 40 + 380);
-				buttonOff9.setPosition(72, 40 + 380);
-				//Button 10
-				buttonOn10.setPosition(300, 40 + 380);
-				buttonOff10.setPosition(300, 40 + 380);
-				//Button11
-				buttonOn11.setPosition(72, 40 + 550);
-				buttonOff11.setPosition(72, 40 + 550);
-				//Button 12
-				buttonOn12.setPosition(300, 40 + 550);
-				buttonOff12.setPosition(300, 40 + 550);
-				///////
-				
-				buttonOn13.setPosition(2000, 40 + 550);
-				buttonOff13.setPosition(2000, 40 + 550);
-				
-				buttonOn14.setPosition(2000, 40 + 380);
-				buttonOff14.setPosition(2000, 40 + 380);
-				//Button 15
-				buttonOn15.setPosition(2000, 40 + 380);
-				buttonOff15.setPosition(2000, 40 + 380);
-				//Button16
-				buttonOn16.setPosition(2000, 40 + 550);
-				buttonOff16.setPosition(2000, 40 + 550);
-				*/
-				
 				return true;
 			}
 		};
@@ -895,62 +389,6 @@ public class SceneManager {
 					buttonsOff[i].setPosition(posX,posY);
 					
 				}
-				
-				//Button 1
-				/*buttonOn1.setPosition(2000, 40 + 380);
-				buttonOff1.setPosition(2000, 40 + 380);
-				//Button 2
-				buttonOn2.setPosition(2000, 40 + 380);
-				buttonOff2.setPosition(2000, 40 + 380);
-				//Button 3
-				buttonOn3.setPosition(2000, 40 + 550);
-				buttonOff3.setPosition(2000, 40 + 550);
-				//Button 4
-				buttonOn4.setPosition(2000, 40 + 550);
-				buttonOff4.setPosition(2000, 40 + 550);
-				
-				//Hide all others
-				buttonOn5.setPosition(2000, 40 + 380);
-				buttonOff5.setPosition(2000, 40 + 380);
-				//Button 6
-				buttonOn6.setPosition(2000, 40 + 380);
-				buttonOff6.setPosition(2000, 40 + 380);
-				//Button7
-				buttonOn7.setPosition(2000, 40 + 550);
-				buttonOff7.setPosition(2000, 40 + 550);
-				//Button 8
-				buttonOn8.setPosition(2000, 40 + 550);
-				buttonOff8.setPosition(2000, 40 + 550);
-				
-				//////
-				buttonOn9.setPosition(2000, 40 + 380);
-				buttonOff9.setPosition(2000, 40 + 380);
-				//Button 10
-				buttonOn10.setPosition(2000, 40 + 380);
-				buttonOff10.setPosition(2000, 40 + 380);
-				//Button11
-				buttonOn11.setPosition(2000, 40 + 550);
-				buttonOff11.setPosition(2000, 40 + 550);
-				//Button 12
-				buttonOn12.setPosition(2000, 40 + 550);
-				buttonOff12.setPosition(2000, 40 + 550);
-				///////
-				
-				buttonOn13.setPosition(72, 40 + 380);
-				buttonOff13.setPosition(72, 40 + 380);
-				
-				buttonOn14.setPosition(300, 40 + 380);
-				buttonOff14.setPosition(300, 40 + 380);
-				//Button 15
-				buttonOn15.setPosition(72, 40 + 550);
-				buttonOff15.setPosition(72, 40 + 550);
-				//Button16
-				buttonOn16.setPosition(300, 40 + 550);
-				buttonOff16.setPosition(300, 40 + 550);
-				*/
-				
-				
-				
 				return true;
 			}
 		};
@@ -976,29 +414,11 @@ public class SceneManager {
 		ITextureRegion victoryTexture = BitmapTextureAtlasTextureRegionFactory.createFromAsset(victoryTextureAtlas, activity, "levelcomplete.png", 0, 0);
 		victoryTextureAtlas.load();
 		
-		Sprite buttonsPanel = new Sprite(0, 0, buttonsPanelTexture, activity.getVertexBufferObjectManager()) {
-			//@Override
-			//public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY) {
-			//	int h = 10/0;
-			//	return true;
-			//}
-		};
+		Sprite buttonsPanel = new Sprite(0, 0, buttonsPanelTexture, activity.getVertexBufferObjectManager());
 		
-		Sprite loseSplash = new Sprite(0, 0, loseTexture , activity.getVertexBufferObjectManager()) {
-			//@Override
-			//public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY) {
-			//	int h = 10/0;
-			//	return true;
-			//}
-		};
+		Sprite loseSplash = new Sprite(0, 0, loseTexture , activity.getVertexBufferObjectManager());
 		
-		Sprite victorySplash = new Sprite(0, 0, victoryTexture , activity.getVertexBufferObjectManager()) {
-			//@Override
-			//public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY) {
-			//	int h = 10/0;
-			//	return true;
-			//}
-		};
+		Sprite victorySplash = new Sprite(0, 0, victoryTexture , activity.getVertexBufferObjectManager());
 		
 		//SEXY TEXT
 		//Before that, display text
@@ -1019,42 +439,6 @@ public class SceneManager {
 		button2Text.setText(gm.getButtonTextByIdentifier("a2"));
 		button3Text.setText(gm.getButtonTextByIdentifier("a3"));
 		button4Text.setText(gm.getButtonTextByIdentifier("a4"));
-		
-		//
-		//button1Text.setWidth(100);
-		//Buttons tags
-		//buttonOn1.setTag(10);
-		
-		/*buttonOff1.setVisible(false);
-		//buttonOff1.setTag(11);
-		
-		//buttonOn2.setTag(12);
-		buttonOff2.setVisible(false);
-		//buttonOff2.setTag(13);
-		
-		//buttonOn3.setTag(14);
-		buttonOff3.setVisible(false);
-		//buttonOff3.setTag(15);
-		
-		//buttonOn4.setTag(16);
-		buttonOff4.setVisible(false);
-		//buttonOff4.setTag(17);
-		
-		buttonOff5.setVisible(false);
-		buttonOff6.setVisible(false);
-		buttonOff7.setVisible(false);
-		buttonOff8.setVisible(false);
-		
-		buttonOff9.setVisible(false);
-		buttonOff10.setVisible(false);
-		buttonOff11.setVisible(false);
-		buttonOff12.setVisible(false);
-		
-		buttonOff13.setVisible(false);
-		buttonOff14.setVisible(false);
-		buttonOff15.setVisible(false);
-		buttonOff16.setVisible(false);
-		*/
 		
 		armory.setPosition(0, 0);
 		communication.setPosition(240, 0);
@@ -1084,59 +468,6 @@ public class SceneManager {
 			buttonsOn[i].setPosition(posX,posY);
 			buttonsOff[i].setPosition(posX,posY);
 		}
-		
-		//Buttons positions - initials. Only from 1 to 4 are shown at the start, everything else is anywhere
-		//Button 1
-		/*
-		buttonOn1.setPosition(72, 40 + 380);
-		buttonOff1.setPosition(72, 40 + 380);
-		//Button 2
-		buttonOn2.setPosition(300, 40 + 380);
-		buttonOff2.setPosition(300, 40 + 380);
-		//Button 3
-		buttonOn3.setPosition(72, 40 + 550);
-		buttonOff3.setPosition(72, 40 + 550);
-		//Button 4
-		buttonOn4.setPosition(300, 40 + 550);
-		buttonOff4.setPosition(300, 40 + 550);
-		
-		//Hide all others
-		buttonOn5.setPosition(2000, 40 + 380);
-		buttonOff5.setPosition(2000, 40 + 380);
-		//Button 6
-		buttonOn6.setPosition(2000, 40 + 380);
-		buttonOff6.setPosition(2000, 40 + 380);
-		//Button7
-		buttonOn7.setPosition(2000, 40 + 550);
-		buttonOff7.setPosition(2000, 40 + 550);
-		//Button 8
-		buttonOn8.setPosition(2000, 40 + 550);
-		buttonOff8.setPosition(2000, 40 + 550);
-		
-		buttonOn9.setPosition(2000, 40 + 380);
-		buttonOff9.setPosition(2000, 40 + 380);
-		//Button 10
-		buttonOn10.setPosition(2000, 40 + 380);
-		buttonOff10.setPosition(2000, 40 + 380);
-		//Button11
-		buttonOn11.setPosition(2000, 40 + 550);
-		buttonOff11.setPosition(2000, 40 + 550);
-		//Button 12
-		buttonOn12.setPosition(2000, 40 + 550);
-		buttonOff12.setPosition(2000, 40 + 550);
-		//
-		buttonOn13.setPosition(2000, 40 + 550);
-		buttonOff13.setPosition(2000, 40 + 550);
-		
-		buttonOn14.setPosition(2000, 40 + 380);
-		buttonOff14.setPosition(2000, 40 + 380);
-		//Button 15
-		buttonOn15.setPosition(2000, 40 + 380);
-		buttonOff15.setPosition(2000, 40 + 380);
-		//Button16
-		buttonOn16.setPosition(2000, 40 + 550);
-		buttonOff16.setPosition(2000, 40 + 550);
-		*/
 		
 		mainGameScene.registerTouchArea(armory);
 		mainGameScene.setTouchAreaBindingOnActionDownEnabled(true);
@@ -1168,143 +499,6 @@ public class SceneManager {
 			
 			mainGameScene.attachChild(buttonsOff[i]);
 		}
-		
-		/*
-		//Button 1
-		mainGameScene.registerTouchArea(buttonOn1);
-		mainGameScene.setTouchAreaBindingOnActionDownEnabled(true);
-		mainGameScene.attachChild(buttonOn1);
-
-		mainGameScene.registerTouchArea(buttonOff1);
-		mainGameScene.setTouchAreaBindingOnActionDownEnabled(true);
-		mainGameScene.attachChild(buttonOff1);
-		//Button 2
-		mainGameScene.registerTouchArea(buttonOn2);
-		mainGameScene.setTouchAreaBindingOnActionDownEnabled(true);
-		mainGameScene.attachChild(buttonOn2);
-		
-		mainGameScene.registerTouchArea(buttonOff2);
-		mainGameScene.setTouchAreaBindingOnActionDownEnabled(true);
-		mainGameScene.attachChild(buttonOff2);
-		//Button 3
-		mainGameScene.registerTouchArea(buttonOn3);
-		mainGameScene.setTouchAreaBindingOnActionDownEnabled(true);
-		mainGameScene.attachChild(buttonOn3);
-				
-		mainGameScene.registerTouchArea(buttonOff3);
-		mainGameScene.setTouchAreaBindingOnActionDownEnabled(true);
-		mainGameScene.attachChild(buttonOff3);
-		//Button 4
-		mainGameScene.registerTouchArea(buttonOn4);
-		mainGameScene.setTouchAreaBindingOnActionDownEnabled(true);
-		mainGameScene.attachChild(buttonOn4);
-						
-		mainGameScene.registerTouchArea(buttonOff4);
-		mainGameScene.setTouchAreaBindingOnActionDownEnabled(true);
-		mainGameScene.attachChild(buttonOff4);
-		
-		//Comm
-		//Button 5
-		mainGameScene.registerTouchArea(buttonOn5);
-		mainGameScene.setTouchAreaBindingOnActionDownEnabled(true);
-		mainGameScene.attachChild(buttonOn5);
-
-		mainGameScene.registerTouchArea(buttonOff5);
-		mainGameScene.setTouchAreaBindingOnActionDownEnabled(true);
-		mainGameScene.attachChild(buttonOff5);
-		//Button 6
-		mainGameScene.registerTouchArea(buttonOn6);
-		mainGameScene.setTouchAreaBindingOnActionDownEnabled(true);
-		mainGameScene.attachChild(buttonOn6);
-				
-		mainGameScene.registerTouchArea(buttonOff6);
-		mainGameScene.setTouchAreaBindingOnActionDownEnabled(true);
-		mainGameScene.attachChild(buttonOff6);
-		//Button 7
-		mainGameScene.registerTouchArea(buttonOn7);
-		mainGameScene.setTouchAreaBindingOnActionDownEnabled(true);
-		mainGameScene.attachChild(buttonOn7);
-						
-		mainGameScene.registerTouchArea(buttonOff7);
-		mainGameScene.setTouchAreaBindingOnActionDownEnabled(true);
-		mainGameScene.attachChild(buttonOff7);
-		//Button 8
-		mainGameScene.registerTouchArea(buttonOn8);
-		mainGameScene.setTouchAreaBindingOnActionDownEnabled(true);
-		mainGameScene.attachChild(buttonOn8);
-								
-		mainGameScene.registerTouchArea(buttonOff8);
-		mainGameScene.setTouchAreaBindingOnActionDownEnabled(true);
-		mainGameScene.attachChild(buttonOff8);
-		
-		//Kitchen
-		//Button 9
-		mainGameScene.registerTouchArea(buttonOn9);
-		mainGameScene.setTouchAreaBindingOnActionDownEnabled(true);
-		mainGameScene.attachChild(buttonOn9);
-
-		mainGameScene.registerTouchArea(buttonOff9);
-		mainGameScene.setTouchAreaBindingOnActionDownEnabled(true);
-		mainGameScene.attachChild(buttonOff9);
-		//Button 10
-		mainGameScene.registerTouchArea(buttonOn10);
-		mainGameScene.setTouchAreaBindingOnActionDownEnabled(true);
-		mainGameScene.attachChild(buttonOn10);
-						
-		mainGameScene.registerTouchArea(buttonOff10);
-		mainGameScene.setTouchAreaBindingOnActionDownEnabled(true);
-		mainGameScene.attachChild(buttonOff10);
-		//Button 11 
-		mainGameScene.registerTouchArea(buttonOn11);
-		mainGameScene.setTouchAreaBindingOnActionDownEnabled(true);
-		mainGameScene.attachChild(buttonOn11);
-								
-		mainGameScene.registerTouchArea(buttonOff11);
-		mainGameScene.setTouchAreaBindingOnActionDownEnabled(true);
-		mainGameScene.attachChild(buttonOff11);
-		//Button 12
-		mainGameScene.registerTouchArea(buttonOn12);
-		mainGameScene.setTouchAreaBindingOnActionDownEnabled(true);
-		mainGameScene.attachChild(buttonOn12);
-										
-		mainGameScene.registerTouchArea(buttonOff12);
-		mainGameScene.setTouchAreaBindingOnActionDownEnabled(true);
-		mainGameScene.attachChild(buttonOff12);
-		
-		//Navigation
-		//Button 13
-		mainGameScene.registerTouchArea(buttonOn13);
-		mainGameScene.setTouchAreaBindingOnActionDownEnabled(true);
-		mainGameScene.attachChild(buttonOn13);
-
-		mainGameScene.registerTouchArea(buttonOff13);
-		mainGameScene.setTouchAreaBindingOnActionDownEnabled(true);
-		mainGameScene.attachChild(buttonOff13);
-		//Button 14
-		mainGameScene.registerTouchArea(buttonOn14);
-		mainGameScene.setTouchAreaBindingOnActionDownEnabled(true);
-		mainGameScene.attachChild(buttonOn14);
-						
-		mainGameScene.registerTouchArea(buttonOff14);
-		mainGameScene.setTouchAreaBindingOnActionDownEnabled(true);
-		mainGameScene.attachChild(buttonOff14);
-		//Button 15
-		mainGameScene.registerTouchArea(buttonOn15);
-		mainGameScene.setTouchAreaBindingOnActionDownEnabled(true);
-		mainGameScene.attachChild(buttonOn15);
-								
-		mainGameScene.registerTouchArea(buttonOff15);
-		mainGameScene.setTouchAreaBindingOnActionDownEnabled(true);
-		mainGameScene.attachChild(buttonOff15);
-		//Button 16
-		mainGameScene.registerTouchArea(buttonOn16);
-		mainGameScene.setTouchAreaBindingOnActionDownEnabled(true);
-		mainGameScene.attachChild(buttonOn16);
-										
-		mainGameScene.registerTouchArea(buttonOff16);
-		mainGameScene.setTouchAreaBindingOnActionDownEnabled(true);
-		mainGameScene.attachChild(buttonOff16);
-		*/
 		
 		//Print the texts and the background
 		//We create the rectangles
@@ -1364,14 +558,8 @@ public class SceneManager {
 			engine.setScene(titleScene);
 			break;
 		case MAINGAME:
-			engine.setScene(mainGameScene);
-			//Loop goes here
-			/*while(true)
-			{
-				button1Text.setText(button1.buttonText);
-			}*/			
+			engine.setScene(mainGameScene);		
 			break;
-			//button1Text.setText(button1.buttonText); 180, 30
 		}
 	}
 	//Rectangle drawing
@@ -1380,12 +568,6 @@ public class SceneManager {
 		coloredRect.setColor(pRed, pGreen, pBlue);
 		return coloredRect;
 	}
-	
-	/*@Override
-	public void onUpdate()
-	{
-		
-	}*/
 	
 	public void setToggled(String buttonIdentifier)
 	{
