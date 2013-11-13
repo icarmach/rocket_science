@@ -31,6 +31,12 @@ public class SceneManager {
 	BitmapTextureAtlas splashTextureAtlas;
 	ITextureRegion splashTextureRegion;
 	
+	BitmapTextureAtlas storyTextureAtlas;
+	ITextureRegion storyTextureRegion;
+	
+	BitmapTextureAtlas instructionTextureAtlas;
+	ITextureRegion instructionTextureRegion;
+	
 	BitmapTextureAtlas loseTextureAtlas;
 	ITextureRegion loseTextureRegion;
 	
@@ -40,6 +46,8 @@ public class SceneManager {
 	Scene splashScene;
 	Scene titleScene;
 	Scene mainGameScene;
+	Scene storyScene;
+	Scene instructionScene;
 	//Text
 	Font mFont;
 	VertexBufferObjectManager vbom;
@@ -65,7 +73,9 @@ public class SceneManager {
 	{
 		SPLASH,
 		TITLE,
-		MAINGAME
+		MAINGAME,
+		STORY,
+		INSTRUCTION
 	}
 
 	public SceneManager(BaseGameActivity activity, Engine engine, Camera camera) {
@@ -96,10 +106,28 @@ public class SceneManager {
 		//this.mFont = FontFactory.create(this.getFontManager(), this.getTextureManager(), 256, 256, Typeface.create(Typeface.DEFAULT, Typeface.BOLD), 32);
 		//this.mFont.load();
 	}
+	
+	//Method loads all of the story scene resources
+	public void loadStorySceneResources() {
+		BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/");
+		storyTextureAtlas = new BitmapTextureAtlas(activity.getTextureManager(), 256, 256, TextureOptions.DEFAULT);
+		storyTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(storyTextureAtlas, activity, "story.png", 0, 0);
+		storyTextureAtlas.load();
+	}
+
+	
+	//Method loads all of the instruction scene resources
+	public void loadInstructionSceneResources() {
+		BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/");
+		instructionTextureAtlas = new BitmapTextureAtlas(activity.getTextureManager(), 256, 256, TextureOptions.DEFAULT);
+		instructionTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(instructionTextureAtlas, activity, "instruction.png", 0, 0);
+		instructionTextureAtlas.load();
+	}
+
 
 	//Method creates the Splash Scene
 	public Scene createSplashScene() {
-		//Create the Splash Scene and set background colour to red and add the splash logo.
+		//Create the Splash Scene and set background color to red and add the splash logo.
 		splashScene = new Scene();
 		splashScene.setBackground(new Background(0, 0, 0));
 		Sprite splash = new Sprite(0, 0, splashTextureRegion, activity.getVertexBufferObjectManager())
@@ -117,6 +145,48 @@ public class SceneManager {
 
 		return splashScene;
 	}
+	
+	//Method creates the Story Scene
+	public Scene createStoryScene() {
+		//Create the Story Scene and set background color to black and add the Story picture.
+		storyScene = new Scene();
+		storyScene.setBackground(new Background(0, 0, 0));
+		Sprite story = new Sprite(0, 0, storyTextureRegion, activity.getVertexBufferObjectManager())
+		{
+			
+			protected void preDraw(GLState pGLState, Camera pCamera)
+			{
+				super.preDraw(pGLState, pCamera);
+				pGLState.enableDither();
+			}
+		};
+		
+		story.setPosition(0,0);
+		storyScene.attachChild(story);
+
+		return storyScene;
+	}
+	
+	//Method creates the Instruction Scene
+	public Scene createInstructionScene() {
+		//Create the Instruction Scene and set background color to black and add the Instruction picture.
+		instructionScene = new Scene();
+		instructionScene.setBackground(new Background(0, 0, 0));
+		Sprite instruction = new Sprite(0, 0, instructionTextureRegion, activity.getVertexBufferObjectManager())
+		{
+			
+			protected void preDraw(GLState pGLState, Camera pCamera)
+			{
+				super.preDraw(pGLState, pCamera);
+				pGLState.enableDither();
+			}
+		};
+		
+		instruction.setPosition(0,0);
+		instructionScene.attachChild(instruction);
+
+		return instructionScene;
+	}
 
 
 
@@ -130,8 +200,14 @@ public class SceneManager {
 		//Create the Main Game Scene
 		mainGameScene = new Scene();
 		createMainGameScene();
-		//Loop?
 		
+		//Create the Main Game Scene
+		storyScene = new Scene();
+		createStoryScene();
+		
+		//Create the Main Game Scene
+		instructionScene = new Scene();
+		createInstructionScene();
 	}
 
 	//Method create the Title Scene
@@ -157,7 +233,7 @@ public class SceneManager {
 		Sprite playButton = new Sprite(0, 0, playButtonTexture, activity.getVertexBufferObjectManager()) {
 			@Override
 			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY) {
-				setCurrentScene(SceneType.MAINGAME);
+				setCurrentScene(SceneType.STORY);
 				
 				return true;
 			}
@@ -600,6 +676,12 @@ public class SceneManager {
 		case MAINGAME:
 			engine.setScene(mainGameScene);
 			gt.start();
+			break;
+		case STORY:
+			engine.setScene(storyScene);
+			break;
+		case INSTRUCTION:
+			engine.setScene(instructionScene);
 			break;
 		}
 	}
