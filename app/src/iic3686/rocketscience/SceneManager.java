@@ -539,7 +539,6 @@ public class SceneManager {
 		mainGameScene.attachChild(victorySplash);
 		
 		gt = new GameThread(mainGameScene, gm, orderRectangle, loseSplash, victorySplash);
-		gt.start();
 	}
 
 	//Method allows you to get the currently active scene
@@ -558,7 +557,8 @@ public class SceneManager {
 			engine.setScene(titleScene);
 			break;
 		case MAINGAME:
-			engine.setScene(mainGameScene);		
+			engine.setScene(mainGameScene);
+			gt.start();
 			break;
 		}
 	}
