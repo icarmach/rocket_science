@@ -26,7 +26,6 @@ public class SceneManager {
 	private BaseGameActivity activity;
 	private Engine engine;
 	private Camera camera;
-	
 	private TagHandler th;
 	
 	BitmapTextureAtlas splashTextureAtlas;
