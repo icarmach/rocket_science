@@ -66,6 +66,7 @@ public class GameThread extends Thread{
 						}
 					loseSplash.setPosition(2000,2000);
 					this.gm.resetGame();
+					errorCounter = 0;
 					levelCounter = 1;
 					Text orderTextLabel= (Text)currentScene.getChildByTag(1);
 					orderTextLabel.setText("Get ready for Level "+levelCounter+"!");
