@@ -672,7 +672,10 @@ public class SceneManager {
 
 					float value = (pSceneTouchEvent.getX() - MissileCount1.getX()) / MissileCount1.getWidth() * 11;
 					MissileCountText.setText("Missile Count: " + (int) value);
-					setToggled("MissileCount", (int)value);
+					if(pSceneTouchEvent.isActionUp())
+					{
+						setToggled("MissileCount", (int)value);
+					}
 				}
 				return true;
 			}
@@ -860,7 +863,10 @@ public class SceneManager {
 
 					float value = (pSceneTouchEvent.getX() - SignalStrength1.getX()) / SignalStrength1.getWidth() * 11;
 					SignalStrengthText.setText("Signal Strength: " + (int) value);
-					setToggled("SignalStrength", (int)value);
+					if(pSceneTouchEvent.isActionUp())
+					{
+						setToggled("SignalStrength", (int)value);
+					}
 				}
 				return true;
 			}
@@ -983,7 +989,10 @@ public class SceneManager {
 
 				OvenText.setText("Oven: " + (int)((180 + angle) / 36));
 				//Button crap
-				setToggled("Oven", (int)((180 + angle) / 36));
+				if(pSceneTouchEvent.isActionUp())
+				{
+					setToggled("Oven", (int)((180 + angle) / 36));
+				}
 				return true;
 			}
 		};
@@ -1159,7 +1168,10 @@ public class SceneManager {
 				this.setRotation(angle);
 
 				SpeedText.setText("Speed: " + (int)((180 + angle) / 36));
-				setToggled("Speed", (int)((180 + angle) / 36));
+				if(pSceneTouchEvent.isActionUp())
+				{
+					setToggled("Speed", (int)((180 + angle) / 36));
+				}
 				return true;
 			}
 		};
