@@ -170,7 +170,7 @@ public class SceneManager {
 		Sprite nextButton = new Sprite(0, 0, nextButtonTexture, activity.getVertexBufferObjectManager()) {
 			@Override
 			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY) {
-				if(pSceneTouchEvent.isActionDown()) {
+				if(pSceneTouchEvent.isActionUp()) {
 					setCurrentScene(SceneType.INSTRUCTION);
 				}
 				return true;
