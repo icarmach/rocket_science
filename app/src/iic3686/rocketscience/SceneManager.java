@@ -148,6 +148,8 @@ public class SceneManager {
 	
 	//Method creates the Story Scene
 	public Scene createStoryScene() {
+		loadStorySceneResources();
+		
 		//Create the Story Scene and set background color to black and add the Story picture.
 		storyScene = new Scene();
 		storyScene.setBackground(new Background(0, 0, 0));
@@ -161,14 +163,39 @@ public class SceneManager {
 			}
 		};
 		
+		BitmapTextureAtlas nextButtonTextureAtlas = new BitmapTextureAtlas(activity.getTextureManager(), 256, 256, TextureOptions.DEFAULT);
+		ITextureRegion nextButtonTexture = BitmapTextureAtlasTextureRegionFactory.createFromAsset(nextButtonTextureAtlas, activity, "next.png", 0, 0);
+		nextButtonTextureAtlas.load();
+
+		Sprite nextButton = new Sprite(0, 0, nextButtonTexture, activity.getVertexBufferObjectManager()) {
+			@Override
+			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY) {
+				setCurrentScene(SceneType.INSTRUCTION);
+				
+				return true;
+			}
+		};
+		
 		story.setPosition(0,0);
 		storyScene.attachChild(story);
+		
+		nextButton.setPosition((camera.getWidth() - nextButton.getWidth()) * 0.5f, (camera.getHeight() - nextButton.getHeight()) * 0.5f + 200);
+		titleScene.setTouchAreaBindingOnActionDownEnabled(true);
+		
+		titleScene.registerTouchArea(nextButton);
+		titleScene.setTouchAreaBindingOnActionDownEnabled(true);
+		titleScene.attachChild(nextButton);
+		
+		
+		
 
 		return storyScene;
 	}
 	
 	//Method creates the Instruction Scene
 	public Scene createInstructionScene() {
+		loadInstructionSceneResources();
+		
 		//Create the Instruction Scene and set background color to black and add the Instruction picture.
 		instructionScene = new Scene();
 		instructionScene.setBackground(new Background(0, 0, 0));
@@ -184,6 +211,26 @@ public class SceneManager {
 		
 		instruction.setPosition(0,0);
 		instructionScene.attachChild(instruction);
+		
+		BitmapTextureAtlas okButtonTextureAtlas = new BitmapTextureAtlas(activity.getTextureManager(), 256, 256, TextureOptions.DEFAULT);
+		ITextureRegion okButtonTexture = BitmapTextureAtlasTextureRegionFactory.createFromAsset(okButtonTextureAtlas, activity, "ok.png", 0, 0);
+		okButtonTextureAtlas.load();
+
+		Sprite okButton = new Sprite(0, 0, okButtonTexture, activity.getVertexBufferObjectManager()) {
+			@Override
+			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY) {
+				setCurrentScene(SceneType.MAINGAME);
+				
+				return true;
+			}
+		};
+		
+		okButton.setPosition((camera.getWidth() - okButton.getWidth()) * 0.5f, (camera.getHeight() - okButton.getHeight()) * 0.5f + 200);
+		titleScene.setTouchAreaBindingOnActionDownEnabled(true);
+		
+		titleScene.registerTouchArea(okButton);
+		titleScene.setTouchAreaBindingOnActionDownEnabled(true);
+		titleScene.attachChild(okButton);
 
 		return instructionScene;
 	}
