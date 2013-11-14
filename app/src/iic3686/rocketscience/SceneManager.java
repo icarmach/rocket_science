@@ -571,16 +571,14 @@ public class SceneManager {
 		victoryTextureAtlas.load();
 		
 		Sprite buttonsPanel = new Sprite(0, 0, buttonsPanelTexture, activity.getVertexBufferObjectManager());
-		
 		Sprite loseSplash = new Sprite(0, 0, loseTexture , activity.getVertexBufferObjectManager());
-		
 		Sprite victorySplash = new Sprite(0, 0, victoryTexture , activity.getVertexBufferObjectManager());
 		
 		//SEXY TEXT
 		//Before that, display text
 		//final VertexBufferObjectManager vertexBufferObjectManager = new VertexBufferObjectManager();
 		//Order text
-		orderText = new Text(20,320, this.mFont, defaultText, new TextOptions(HorizontalAlign.CENTER),this.vbom);
+		orderText = new Text(20,10, this.mFont, defaultText, new TextOptions(HorizontalAlign.CENTER),this.vbom);
 		orderText.setText("Instruccion 1");
 		orderText.setTag(1);
 		//orderText.setTag(100);
@@ -596,10 +594,10 @@ public class SceneManager {
 		button3Text.setText(gm.getButtonTextByIdentifier("a3"));
 		button4Text.setText(gm.getButtonTextByIdentifier("a4"));
 		
-		armory.setPosition(0, 0);
-		communication.setPosition(240, 0);
-		kitchen.setPosition(0, 120);
-		navigation.setPosition(240, 120);
+		armory.setPosition(0, 140);
+		communication.setPosition(240, 140);
+		kitchen.setPosition(0, 260);
+		navigation.setPosition(240, 260);
 		
 		buttonsPanel.setPosition(0,380);
 		
@@ -668,8 +666,8 @@ public class SceneManager {
 		
 		//Print the texts and the background
 		//We create the rectangles
-		final Rectangle orderRectangle = this.makeColoredRectangle(0,300,1, 1, 1, this.vbom, (int)this.camera.getWidth(), 80);
-		final Rectangle timeRectangle = this.makeColoredRectangle(0,295,1, 0, 0, this.vbom, (int)this.camera.getWidth(), 5);
+		final Rectangle orderRectangle = this.makeColoredRectangle(0,0,1, 1, 1, this.vbom, (int)this.camera.getWidth(), 80);
+		final Rectangle timeRectangle = this.makeColoredRectangle(0,75,1, 0, 0, this.vbom, (int)this.camera.getWidth(), 5);
 		
 		final Rectangle button1Rectangle = this.makeColoredRectangle(30, 40 + 350,1, 1, 1, this.vbom, 180, 30);
 		final Rectangle button2Rectangle = this.makeColoredRectangle(270, 40+350,1, 1, 1, this.vbom, 180, 30);
