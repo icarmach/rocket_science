@@ -180,7 +180,7 @@ public class SceneManager {
 		story.setPosition(0,0);
 		storyScene.attachChild(story);
 		
-		nextButton.setPosition((camera.getWidth() - nextButton.getWidth()) * 0.5f + 200, (camera.getHeight() - nextButton.getHeight()) * 0.5f + 200);
+		nextButton.setPosition((camera.getWidth() - nextButton.getWidth()) * 0.5f + 150, (camera.getHeight() - nextButton.getHeight()) * 0.5f + 200);
 		storyScene.setTouchAreaBindingOnActionDownEnabled(true);
 		
 		storyScene.registerTouchArea(nextButton);
