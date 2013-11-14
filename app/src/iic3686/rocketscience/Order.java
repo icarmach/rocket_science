@@ -42,7 +42,7 @@ public class Order {
 			while(orderValue == buttonValue)
 				orderValue = randomGenerator.nextInt(8)+1;
 			//Make the text automatic
-			this.orderText = "Set the "+this.buttonLinked.buttonText+"to  "+orderValue+"("+this.buttonLinked.section+")";
+			this.orderText = "Set the "+this.buttonLinked.buttonText+" to  "+orderValue+"("+this.buttonLinked.section+")";
 		}
 		else //Spinner
 		{
@@ -52,7 +52,7 @@ public class Order {
 			while(orderValue == buttonValue)
 				orderValue = randomGenerator.nextInt(10);
 			//Make the text automatic
-			this.orderText = "Set the "+this.buttonLinked.buttonText+"to  "+orderValue+"("+this.buttonLinked.section+")";
+			this.orderText = "Set the "+this.buttonLinked.buttonText+" to  "+orderValue+"("+this.buttonLinked.section+")";
 		}
 
 	}
@@ -100,7 +100,7 @@ public class Order {
 			while(orderValue == buttonValue)
 				orderValue = randomGenerator.nextInt(8)+1;
 			//Make the text automatic
-			this.orderText = "Set the "+this.buttonLinked.buttonText+"to  "+orderValue+"("+this.buttonLinked.section+")";
+			this.orderText = "Set the "+this.buttonLinked.buttonText+" to  "+orderValue+"("+this.buttonLinked.section+")";
 		}
 		else
 		{
@@ -109,7 +109,7 @@ public class Order {
 			while(orderValue == buttonValue)
 				orderValue = randomGenerator.nextInt(10);
 			//Make the text automatic
-			this.orderText = "Set the "+this.buttonLinked.buttonText+"to  "+orderValue+"("+this.buttonLinked.section+")";
+			this.orderText = "Set the "+this.buttonLinked.buttonText+" to  "+orderValue+"("+this.buttonLinked.section+")";
 		}
 		
 	}
