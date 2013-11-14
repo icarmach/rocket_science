@@ -110,7 +110,7 @@ public class SceneManager {
 	//Method loads all of the story scene resources
 	public void loadStorySceneResources() {
 		BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/");
-		storyTextureAtlas = new BitmapTextureAtlas(activity.getTextureManager(), 720, 1280, TextureOptions.DEFAULT);
+		storyTextureAtlas = new BitmapTextureAtlas(activity.getTextureManager(), 480, 720, TextureOptions.DEFAULT);
 		storyTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(storyTextureAtlas, activity, "story.png", 0, 0);
 		storyTextureAtlas.load();
 	}
@@ -119,7 +119,7 @@ public class SceneManager {
 	//Method loads all of the instruction scene resources
 	public void loadInstructionSceneResources() {
 		BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/");
-		instructionTextureAtlas = new BitmapTextureAtlas(activity.getTextureManager(), 720, 1280, TextureOptions.DEFAULT);
+		instructionTextureAtlas = new BitmapTextureAtlas(activity.getTextureManager(), 480, 720, TextureOptions.DEFAULT);
 		instructionTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(instructionTextureAtlas, activity, "instruction.png", 0, 0);
 		instructionTextureAtlas.load();
 	}
@@ -170,8 +170,9 @@ public class SceneManager {
 		Sprite nextButton = new Sprite(0, 0, nextButtonTexture, activity.getVertexBufferObjectManager()) {
 			@Override
 			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY) {
-				setCurrentScene(SceneType.INSTRUCTION);
-				
+				if(pSceneTouchEvent.isActionDown()) {
+					setCurrentScene(SceneType.INSTRUCTION);
+				}
 				return true;
 			}
 		};
@@ -179,7 +180,7 @@ public class SceneManager {
 		story.setPosition(0,0);
 		storyScene.attachChild(story);
 		
-		nextButton.setPosition((camera.getWidth() - nextButton.getWidth()) * 0.5f, (camera.getHeight() - nextButton.getHeight()) * 0.5f + 200);
+		nextButton.setPosition((camera.getWidth() - nextButton.getWidth()) * 0.5f + 200, (camera.getHeight() - nextButton.getHeight()) * 0.5f + 200);
 		storyScene.setTouchAreaBindingOnActionDownEnabled(true);
 		
 		storyScene.registerTouchArea(nextButton);
@@ -219,13 +220,14 @@ public class SceneManager {
 		Sprite okButton = new Sprite(0, 0, okButtonTexture, activity.getVertexBufferObjectManager()) {
 			@Override
 			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY) {
+				
 				setCurrentScene(SceneType.MAINGAME);
 				
 				return true;
 			}
 		};
 		
-		okButton.setPosition((camera.getWidth() - okButton.getWidth()) * 0.5f, (camera.getHeight() - okButton.getHeight()) * 0.5f + 200);
+		okButton.setPosition((camera.getWidth() - okButton.getWidth()) * 0.5f + 100, (camera.getHeight() - okButton.getHeight()) * 0.5f + 200);
 		instructionScene.setTouchAreaBindingOnActionDownEnabled(true);
 		
 		instructionScene.registerTouchArea(okButton);
