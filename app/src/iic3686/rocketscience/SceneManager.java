@@ -361,13 +361,22 @@ public class SceneManager {
 		final Sprite knob = new Sprite(0, 0, knobTexture, activity.getVertexBufferObjectManager()){
 			@Override
 			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY) {
-				float tx = pSceneTouchEvent.getX() - (this.getX() + this.getWidth() / 2);
-				float ty = pSceneTouchEvent.getY() - (this.getY());
-				double  Radius = Math.atan2(ty,tx);
-				double Angle = Radius * 180 / Math.PI;
-				this.setRotation((float) Angle);
+				float x0 = this.getX() + this.getWidth() / 2;
+				float y0 = this.getY() + this.getHeight() / 2;
+				float x1 = pSceneTouchEvent.getX();
+				float y1 = pSceneTouchEvent.getY();
 
-				//button1Text.setText("" + (int)((180 + Angle) / 36));
+				float angle = 0;
+				
+				if(y0 != y1)
+				{
+					angle = - (float)Math.atan((double) (x1 - x0)/(y1 - y0));
+				}
+				angle = (float) (angle*360 / Math.PI);
+				
+				this.setRotation(angle);
+				
+				button1Text.setText("" + (int)((180 + angle) / 36));
 				return true;
 			}
 		};
@@ -580,7 +589,8 @@ public class SceneManager {
 		//Order text
 		orderText = new Text(20,10, this.mFont, defaultText, new TextOptions(HorizontalAlign.CENTER),this.vbom);
 		orderText.setText("Instruccion 1");
-		orderText.setTag(1);
+		th.addTag("orderText");
+		orderText.setTag(th.getTag("orderText"));
 		//orderText.setTag(100);
 	
 		//Button text
@@ -609,6 +619,7 @@ public class SceneManager {
 		{
 			int posX = 2000;
 			int posY = 2000;
+			
 			
 			if(i < 4)//So only the first 4 buttons show
 			{
@@ -647,7 +658,6 @@ public class SceneManager {
 		//Knob section
 		//mainGameScene.registerTouchArea(knob);
 		//mainGameScene.setTouchAreaBindingOnActionDownEnabled(true);
-		//mainGameScene.attachChild(knob);
 		
 		//Slider Section
 		//mainGameScene.attachChild(slider1);
@@ -678,7 +688,8 @@ public class SceneManager {
 		mainGameScene.attachChild(orderRectangle);
 		
 		//Time Rectangle
-		timeRectangle.setTag(500);
+		th.addTag("timeRectangle");
+		timeRectangle.setTag(th.getTag("timeRectangle"));
 		mainGameScene.attachChild(timeRectangle);
 		//Button rectangles
 		mainGameScene.attachChild(button1Rectangle);

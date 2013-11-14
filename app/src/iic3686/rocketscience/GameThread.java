@@ -21,6 +21,8 @@ public class GameThread extends Thread{
 	float colorValue;
 	Sprite loseSplash;
 	Sprite victorySplash;
+	
+	private TagHandler th;
 	//
 	
 	public GameThread(Scene startScene, GameManager gm, Rectangle orderRectangle, Sprite loseSplash, Sprite victorySplash)
@@ -34,7 +36,8 @@ public class GameThread extends Thread{
 		this.errorCounter = 0;
 		this.loseSplash = loseSplash;
 		this.victorySplash = victorySplash;
-		this.timeRectangle = (Rectangle)currentScene.getChildByTag(500);
+		this.th = TagHandler.getInstance();
+		this.timeRectangle = (Rectangle)currentScene.getChildByTag(th.getTag("timeRectangle"));
 	}
 	
 	public void run() {
@@ -68,7 +71,7 @@ public class GameThread extends Thread{
 					this.gm.resetGame();
 					errorCounter = 0;
 					levelCounter = 1;
-					Text orderTextLabel= (Text)currentScene.getChildByTag(1);
+					Text orderTextLabel= (Text)currentScene.getChildByTag(th.getTag("orderText"));
 					orderTextLabel.setText("Get ready for Level "+levelCounter+"!");
 					try {
 						this.sleep(2000);

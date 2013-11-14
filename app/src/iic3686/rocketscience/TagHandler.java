@@ -12,7 +12,7 @@ public class TagHandler {
 	private TagHandler()
 	{
 		map = new HashMap<String, Integer>();
-		count = 0;
+		count = 1;
 	}
 	
 	public static TagHandler getInstance()
