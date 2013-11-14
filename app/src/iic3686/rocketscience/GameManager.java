@@ -113,6 +113,18 @@ public class GameManager {
     		}
 	}
 	
+	//Searchs the button list for the button with the identifier given and changes its toggled status
+		public void setButtonValue(String buttonIdentifier, int amount)
+		{
+			for(Button e: buttons){
+	    		if(e.identifier.equals(buttonIdentifier))
+		    		{
+		    			e.toggleButton(amount);
+		    		}
+	    			
+	    		}
+		}
+		
 	//Get current order text
 	public String getCurrentOrderText()
 	{
