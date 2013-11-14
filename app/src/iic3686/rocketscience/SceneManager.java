@@ -180,11 +180,11 @@ public class SceneManager {
 		storyScene.attachChild(story);
 		
 		nextButton.setPosition((camera.getWidth() - nextButton.getWidth()) * 0.5f, (camera.getHeight() - nextButton.getHeight()) * 0.5f + 200);
-		titleScene.setTouchAreaBindingOnActionDownEnabled(true);
+		storyScene.setTouchAreaBindingOnActionDownEnabled(true);
 		
-		titleScene.registerTouchArea(nextButton);
-		titleScene.setTouchAreaBindingOnActionDownEnabled(true);
-		titleScene.attachChild(nextButton);
+		storyScene.registerTouchArea(nextButton);
+		storyScene.setTouchAreaBindingOnActionDownEnabled(true);
+		storyScene.attachChild(nextButton);
 		
 		
 		
@@ -226,11 +226,11 @@ public class SceneManager {
 		};
 		
 		okButton.setPosition((camera.getWidth() - okButton.getWidth()) * 0.5f, (camera.getHeight() - okButton.getHeight()) * 0.5f + 200);
-		titleScene.setTouchAreaBindingOnActionDownEnabled(true);
+		instructionScene.setTouchAreaBindingOnActionDownEnabled(true);
 		
-		titleScene.registerTouchArea(okButton);
-		titleScene.setTouchAreaBindingOnActionDownEnabled(true);
-		titleScene.attachChild(okButton);
+		instructionScene.registerTouchArea(okButton);
+		instructionScene.setTouchAreaBindingOnActionDownEnabled(true);
+		instructionScene.attachChild(okButton);
 
 		return instructionScene;
 	}
