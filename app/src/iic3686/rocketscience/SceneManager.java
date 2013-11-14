@@ -39,7 +39,7 @@ public class SceneManager {
 	
 	BitmapTextureAtlas loseTextureAtlas;
 	ITextureRegion loseTextureRegion;
-	
+	//D:
 	BitmapTextureAtlas victoryTextureAtlas;
 	ITextureRegion victoryTextureRegion;
 	
@@ -110,7 +110,7 @@ public class SceneManager {
 	//Method loads all of the story scene resources
 	public void loadStorySceneResources() {
 		BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/");
-		storyTextureAtlas = new BitmapTextureAtlas(activity.getTextureManager(), 256, 256, TextureOptions.DEFAULT);
+		storyTextureAtlas = new BitmapTextureAtlas(activity.getTextureManager(), 720, 1280, TextureOptions.DEFAULT);
 		storyTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(storyTextureAtlas, activity, "story.png", 0, 0);
 		storyTextureAtlas.load();
 	}
@@ -119,7 +119,7 @@ public class SceneManager {
 	//Method loads all of the instruction scene resources
 	public void loadInstructionSceneResources() {
 		BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/");
-		instructionTextureAtlas = new BitmapTextureAtlas(activity.getTextureManager(), 256, 256, TextureOptions.DEFAULT);
+		instructionTextureAtlas = new BitmapTextureAtlas(activity.getTextureManager(), 720, 1280, TextureOptions.DEFAULT);
 		instructionTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(instructionTextureAtlas, activity, "instruction.png", 0, 0);
 		instructionTextureAtlas.load();
 	}

@@ -35,7 +35,8 @@ public class GameManager {
 		buttons.add(new Button("a1", "Armory", "Pulse Cannon"));
 		buttons.add(new Button("a2", "Armory", "Energy Shields"));
 		buttons.add(new Button("a3", "Armory", "Plasma Missiles"));
-		buttons.add(new Button("a4", "Armory", "Sword Shooter"));
+		//buttons.add(new Button("a4", "Armory", "Sword Shooter"));
+		buttons.add(new Button("a4", "Armory", "Banana Blade",2));
 		//2 - Communications buttons
 		buttons.add(new Button("c1", "Comm." , "News Dispenser"));
 		buttons.add(new Button("c2", "Comm." , "Journalizer"));
@@ -114,16 +115,15 @@ public class GameManager {
 	}
 	
 	//Searchs the button list for the button with the identifier given and changes its toggled status
-		public void setButtonValue(String buttonIdentifier, int amount)
-		{
-			for(Button e: buttons){
-	    		if(e.identifier.equals(buttonIdentifier))
-		    		{
-		    			e.toggleButton(amount);
-		    		}
-	    			
-	    		}
-		}
+	public void setButtonValue(String buttonIdentifier, int amount)
+	{
+		for(Button e: buttons){
+	    	if(e.identifier.equals(buttonIdentifier))
+		    	{
+		    		e.toggleButton(amount);
+		    	}	
+	    	}
+	}
 		
 	//Get current order text
 	public String getCurrentOrderText()
