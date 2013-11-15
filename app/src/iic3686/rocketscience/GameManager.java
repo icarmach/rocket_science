@@ -32,26 +32,21 @@ public class GameManager {
 		// 4 - Navigation
 		//Button newButton = new Button("b1", 1, "Button 1");
 		//1 - Armory buttons
-		buttons.add(new Button("a1", "Armory", "Pulse Cannon"));
-		buttons.add(new Button("a2", "Armory", "Energy Shields"));
-		buttons.add(new Button("a3", "Armory", "Plasma Missiles"));
-		//buttons.add(new Button("a4", "Armory", "Sword Shooter"));
-		buttons.add(new Button("a4", "Armory", "Banana Blade",2));
+		buttons.add(new Button("LaserBlaster", "Armory", "Laser Blaster"));
+		buttons.add(new Button("Machinegun", "Armory", "Machinegun"));
+		buttons.add(new Button("MissileCount", "Armory", "Missile Count",2));
 		//2 - Communications buttons
-		buttons.add(new Button("c1", "Comm." , "News Dispenser"));
-		buttons.add(new Button("c2", "Comm." , "Journalizer"));
-		buttons.add(new Button("c3", "Comm." , "Radio Blocker"));
-		buttons.add(new Button("c4", "Comm" , "Messenger"));
+		buttons.add(new Button("SignalJammer", "Comm." , "Signal Jammer"));
+		buttons.add(new Button("Wifi", "Comm." , "Wifi"));
+		buttons.add(new Button("SignalStrength", "Comm." , "Signal Strength", 2));
 		//3 - Kitchen
-		buttons.add(new Button("k1", "Kitchen", "Egg Scrambler"));
-		buttons.add(new Button("k2", "Kitchen", "Meat Masher"));
-		buttons.add(new Button("k3", "Kitchen", "Veggie Destroyer"));
-		buttons.add(new Button("k4", "Kitchen", "Brownie Mixer"));
+		buttons.add(new Button("Fridge", "Kitchen", "Fridge", 1, "Close the ", "Open the "));
+		buttons.add(new Button("Microwave", "Kitchen", "Microwave", 1,  "Start the ", "Stop the "));
+		buttons.add(new Button("Oven", "Kitchen", "Oven", 3));
 		//4 - Navigation
-		buttons.add(new Button("n1", "Nav.", "Autopilot"));
-		buttons.add(new Button("n2", "Nav.", "Autoparking"));
-		buttons.add(new Button("n3", "Nav.", "Lightspeed Drive"));
-		buttons.add(new Button("n4", "Nav.", "Flux Capacitor"));
+		buttons.add(new Button("Engines", "Nav.", "Engines", 1 , "Start the", "Stop the "));
+		buttons.add(new Button("Autopilot", "Nav.", "Autopilot", 1, "Engage the ", "Disengage the "));
+		buttons.add(new Button("Speed", "Nav.", "Speed", 3));
 		//Define orders
 		//Just iterate through buttons, creating one order per button
 		for(Button e: buttons){

@@ -525,29 +525,12 @@ public class SceneManager {
 		this.gm.pressButton(buttonIdentifier);
 	}
 
-	public Sprite onButtonFactory(ITextureRegion texture, final int i, final Sprite[] buttonsOff)
+	public void setToggled(String buttonIdentifier, int amount)
 	{
-		final String identifier;
-
-		if(i < 4) identifier = "a" + (i%4 + 1);
-		else if(i < 8) identifier = "c" + (i%4 + 1);
-		else if(i < 12) identifier = "k" + (i%4 + 1);
-		else identifier = "n" + (i%4 + 1);
-
-		Sprite button = new Sprite(0, 0, texture, activity.getVertexBufferObjectManager()) {
-			@Override
-			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY) {
-				if(pSceneTouchEvent.isActionDown()) {
-					this.setVisible(!this.isVisible());
-					buttonsOff[i].setVisible(!this.isVisible());
-					setToggled(identifier);
-				}
-				return true;
-			}
-		};
-
-		return button;
+		//this.button1Text.setText(this.button1Text.getText() + "a");
+		this.gm.setButtonValue(buttonIdentifier, amount);
 	}
+
 
 	public void createArmoryControls(Scene mainGameScene)
 	{
@@ -689,6 +672,7 @@ public class SceneManager {
 
 					float value = (pSceneTouchEvent.getX() - MissileCount1.getX()) / MissileCount1.getWidth() * 11;
 					MissileCountText.setText("Missile Count: " + (int) value);
+					setToggled("MissileCount", (int)value);
 				}
 				return true;
 			}
@@ -876,6 +860,7 @@ public class SceneManager {
 
 					float value = (pSceneTouchEvent.getX() - SignalStrength1.getX()) / SignalStrength1.getWidth() * 11;
 					SignalStrengthText.setText("Signal Strength: " + (int) value);
+					setToggled("SignalStrength", (int)value);
 				}
 				return true;
 			}
@@ -997,6 +982,8 @@ public class SceneManager {
 				this.setRotation(angle);
 
 				OvenText.setText("Oven: " + (int)((180 + angle) / 36));
+				//Button crap
+				setToggled("Oven", (int)((180 + angle) / 36));
 				return true;
 			}
 		};
@@ -1172,6 +1159,7 @@ public class SceneManager {
 				this.setRotation(angle);
 
 				SpeedText.setText("Speed: " + (int)((180 + angle) / 36));
+				setToggled("Speed", (int)((180 + angle) / 36));
 				return true;
 			}
 		};

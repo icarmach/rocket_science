@@ -14,6 +14,10 @@ public class Button {
 	int value;
 	//What type of button this is
 	int type;
+	//Custom text
+	public String textON = "";
+	public String textOFF="";
+	public boolean customText = false;
 	
 	//Option 1: Don't set the toggled value, starts true
 	public Button(String identifier,String section, String buttonText)
@@ -34,7 +38,7 @@ public class Button {
 		this.toggled = toggled;
 		type = 1;
 	}
-	//Option 1: Don't set the toggled value, starts true
+	//Option 3: Define button type
 	public Button(String identifier,String section, String buttonText, int buttonType)
 	{
 		this.identifier = identifier;
@@ -48,15 +52,41 @@ public class Button {
 		else if(buttonType == 2) //Slider
 		{
 			type = 2;
-			value = 1;
+			value = 0;
 		}
 		else //Spinner
 		{
 			type = 3;
-			value = 0;
+			value = 5;
 		}
 	
 	}
+	//Option 4: Button type with custom text
+	public Button(String identifier,String section, String buttonText, int buttonType, String textOn, String textOff)
+	{
+		this.identifier = identifier;
+		this.section = section;
+		this.buttonText = buttonText;
+		if(buttonType == 1) //Normal toggle
+		{
+			type = 1;
+			toggled = true;
+		}
+		else if(buttonType == 2) //Slider
+		{
+			type = 2;
+			value = 0;
+		}
+		else //Spinner
+		{
+			type = 3;
+			value = 5;
+		}
+		customText = true;
+		this.textOFF = textOff;
+		this.textON = textOn;
+	}
+	
 	//Changes the toggled status of the button to the opposite one
 	public void toggleButton()
 	{
@@ -68,17 +98,17 @@ public class Button {
 	{
 		if(type == 2)
 		{
-			if(value+amount > 9)
+			if(amount > 9)
 				value = 9;
 			else
-				value += amount;
+				value = amount;
 		}
 		else if(type == 3)
 		{
-			if(value+amount > 10)
+			if(amount > 10)
 				value = 10;
 			else
-				value += amount;
+				value = amount;
 		}
 		else//Impossible, just in case
 		{

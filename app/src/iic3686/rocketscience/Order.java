@@ -30,9 +30,15 @@ public class Order {
 			this.buttonInitial = this.buttonLinked.toggled;
 			//Make the text automatic
 			if(this.buttonInitial)
-				this.orderText = "Turn off the "+this.buttonLinked.buttonText+" ("+this.buttonLinked.section+").";
+				if(this.buttonLinked.customText)
+					this.orderText = this.buttonLinked.textOFF+this.buttonLinked.buttonText+" ("+this.buttonLinked.section+").";
+				else
+					this.orderText = "Turn off the "+this.buttonLinked.buttonText+" ("+this.buttonLinked.section+").";
 			else
-				this.orderText = "Turn on the "+this.buttonLinked.buttonText+" ("+this.buttonLinked.section+")";
+				if(this.buttonLinked.customText)
+					this.orderText = this.buttonLinked.textON+this.buttonLinked.buttonText+" ("+this.buttonLinked.section+").";
+				else
+					this.orderText = "Turn on the "+this.buttonLinked.buttonText+" ("+this.buttonLinked.section+")";
 		}
 		else if(this.buttonLinked.type == 2)//Slider
 		{
@@ -79,8 +85,7 @@ public class Order {
 		}
 		//Define text
 		this.orderText = orderText;
-	}
-	
+	}	
 	//This method allows us to recycle the order
 	public void refreshOrder()
 	{
@@ -89,9 +94,15 @@ public class Order {
 			this.buttonInitial = this.buttonLinked.toggled;
 			//Redefine text
 			if(this.buttonInitial)
-				this.orderText = "Turn off the "+this.buttonLinked.buttonText+" ("+this.buttonLinked.section+")";
+				if(this.buttonLinked.customText)
+					this.orderText = this.buttonLinked.textOFF+this.buttonLinked.buttonText+" ("+this.buttonLinked.section+").";
+				else
+					this.orderText = "Turn off the "+this.buttonLinked.buttonText+" ("+this.buttonLinked.section+")";
 			else
-				this.orderText = "Turn on the "+this.buttonLinked.buttonText+" ("+this.buttonLinked.section+")";
+				if(this.buttonLinked.customText)
+					this.orderText = this.buttonLinked.textON+this.buttonLinked.buttonText+" ("+this.buttonLinked.section+").";
+				else
+					this.orderText = "Turn on the "+this.buttonLinked.buttonText+" ("+this.buttonLinked.section+")";
 		}
 		else if(this.buttonLinked.type == 2)
 		{
