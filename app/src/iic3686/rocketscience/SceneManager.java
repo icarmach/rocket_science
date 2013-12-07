@@ -45,6 +45,7 @@ public class SceneManager {
 
 	Scene splashScene;
 	Scene titleScene;
+	Scene tutorialScene;
 	Scene mainGameScene;
 	Scene storyScene;
 	Scene instructionScene;
@@ -243,6 +244,9 @@ public class SceneManager {
 		titleScene = new Scene();
 		createTitleScene();
 
+		//Create the Tutorial Scene
+		tutorialScene = new Scene();
+		createTutorialScene();
 
 		//Create the Main Game Scene
 		mainGameScene = new Scene();
@@ -517,6 +521,191 @@ public class SceneManager {
 
 		gt = new GameThread(mainGameScene, gm, orderRectangle, loseSplash, victorySplash);
 	}
+	
+	//Method create the Main Game Scene
+	public void createTutorialScene() {
+		tutorialScene.setBackground(new Background(0, 0, 0));
+		
+		//Top options
+		//Armory Button
+		BitmapTextureAtlas armoryTextureAtlas = new BitmapTextureAtlas(activity.getTextureManager(), 240, 120, TextureOptions.DEFAULT);
+		ITextureRegion armoryTexture = BitmapTextureAtlasTextureRegionFactory.createFromAsset(armoryTextureAtlas, activity, "armory.png", 0, 0);
+		armoryTextureAtlas.load();
+
+		Sprite armory = new Sprite(0, 0, armoryTexture, activity.getVertexBufferObjectManager()) {
+			@Override
+			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY) {
+				
+				armoryIn(tutorialScene);
+				communicationOut(tutorialScene);
+				kitchenOut(tutorialScene);
+				navigationOut(tutorialScene);
+				
+				return true;
+			}
+		};
+
+		//Communication Button
+		BitmapTextureAtlas communicationTextureAtlas = new BitmapTextureAtlas(activity.getTextureManager(), 240, 120, TextureOptions.DEFAULT);
+		ITextureRegion communicationTexture = BitmapTextureAtlasTextureRegionFactory.createFromAsset(communicationTextureAtlas, activity, "communication.png", 0, 0);
+		communicationTextureAtlas.load();
+
+		Sprite communication = new Sprite(0, 0, communicationTexture, activity.getVertexBufferObjectManager()) {
+			@Override
+			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY) {
+				armoryOut(tutorialScene);
+				communicationIn(tutorialScene);
+				kitchenOut(tutorialScene);
+				navigationOut(tutorialScene);
+				
+				return true;
+			}
+		};
+
+		//Kitchen Button
+		BitmapTextureAtlas kitchenTextureAtlas = new BitmapTextureAtlas(activity.getTextureManager(), 240, 120, TextureOptions.DEFAULT);
+		ITextureRegion kitchenTexture = BitmapTextureAtlasTextureRegionFactory.createFromAsset(kitchenTextureAtlas, activity, "kitchen.png", 0, 0);
+		kitchenTextureAtlas.load();
+
+		Sprite kitchen = new Sprite(0, 0, kitchenTexture, activity.getVertexBufferObjectManager()) {
+			@Override
+			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY) {
+				armoryOut(tutorialScene);
+				communicationOut(tutorialScene);
+				kitchenIn(tutorialScene);
+				navigationOut(tutorialScene);
+				
+				return true;
+			}
+		};
+
+		//Navigation Button
+		BitmapTextureAtlas navigationTextureAtlas = new BitmapTextureAtlas(activity.getTextureManager(), 240, 120, TextureOptions.DEFAULT);
+		ITextureRegion navigationTexture = BitmapTextureAtlasTextureRegionFactory.createFromAsset(navigationTextureAtlas, activity, "navigation.png", 0, 0);
+		navigationTextureAtlas.load();
+
+		Sprite navigation = new Sprite(0, 0, navigationTexture, activity.getVertexBufferObjectManager()) {
+			@Override
+			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY) {
+				armoryOut(tutorialScene);
+				communicationOut(tutorialScene);
+				kitchenOut(tutorialScene);
+				navigationIn(tutorialScene);
+				
+				return true;
+			}
+		};
+
+		//Load victory and defeat texture
+		BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/");
+		loseTextureAtlas = new BitmapTextureAtlas(activity.getTextureManager(), 480, 480, TextureOptions.DEFAULT);
+		loseTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(loseTextureAtlas, activity, "gameover.png", 0, 0);
+
+
+		victoryTextureAtlas = new BitmapTextureAtlas(activity.getTextureManager(), 480, 480, TextureOptions.DEFAULT);
+		victoryTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(victoryTextureAtlas, activity, "levelcomplete.png", 0, 0);
+
+
+		//
+		BitmapTextureAtlas buttonsPanelTextureAtlas = new BitmapTextureAtlas(activity.getTextureManager(), 480, 480, TextureOptions.DEFAULT);
+		ITextureRegion buttonsPanelTexture = BitmapTextureAtlasTextureRegionFactory.createFromAsset(buttonsPanelTextureAtlas, activity, "buttons_panel.JPG", 0, 0);
+		buttonsPanelTextureAtlas.load();
+
+		ITextureRegion loseTexture = BitmapTextureAtlasTextureRegionFactory.createFromAsset(loseTextureAtlas, activity, "gameover.png", 0, 0);
+		loseTextureAtlas.load();
+
+		ITextureRegion victoryTexture = BitmapTextureAtlasTextureRegionFactory.createFromAsset(victoryTextureAtlas, activity, "levelcomplete.png", 0, 0);
+		victoryTextureAtlas.load();
+
+		Sprite buttonsPanel = new Sprite(0, 0, buttonsPanelTexture, activity.getVertexBufferObjectManager());
+		Sprite loseSplash = new Sprite(0, 0, loseTexture , activity.getVertexBufferObjectManager());
+		Sprite victorySplash = new Sprite(0, 0, victoryTexture , activity.getVertexBufferObjectManager());
+
+		//SEXY TEXT
+		//Before that, display text
+		//final VertexBufferObjectManager vertexBufferObjectManager = new VertexBufferObjectManager();
+		//Order text
+		orderText = new Text(20,10, this.mFont, defaultText, new TextOptions(HorizontalAlign.CENTER),this.vbom);
+		orderText.setText("Instruccion 1");
+		th.addTag("orderText");
+		orderText.setTag(th.getTag("orderText"));
+		//orderText.setTag(100);
+
+		//Button text
+
+		armory.setPosition(0, 140);
+		communication.setPosition(240, 140);
+		kitchen.setPosition(0, 260);
+		navigation.setPosition(240, 260);
+
+		buttonsPanel.setPosition(0,380);
+
+		//Victory and defeat
+		loseSplash.setPosition(2000,2000);
+		victorySplash.setPosition(2000,2000);
+
+		tutorialScene.registerTouchArea(armory);
+		tutorialScene.setTouchAreaBindingOnActionDownEnabled(true);
+		tutorialScene.attachChild(armory);
+
+		tutorialScene.registerTouchArea(communication);
+		tutorialScene.setTouchAreaBindingOnActionDownEnabled(true);
+		tutorialScene.attachChild(communication);
+
+		tutorialScene.registerTouchArea(kitchen);
+		tutorialScene.setTouchAreaBindingOnActionDownEnabled(true);
+		tutorialScene.attachChild(kitchen);
+
+		tutorialScene.registerTouchArea(navigation);
+		tutorialScene.setTouchAreaBindingOnActionDownEnabled(true);
+		tutorialScene.attachChild(navigation);
+
+
+		this.createArmoryControls(tutorialScene);
+		this.createCommunicationControls(tutorialScene);
+		this.createKitchenControls(tutorialScene);
+		this.createNavigationControls(tutorialScene);
+
+		//Print the texts and the background
+		//We create the rectangles
+		final Rectangle orderRectangle = this.makeColoredRectangle(0,0,1, 1, 1, this.vbom, (int)this.camera.getWidth(), 80);
+		final Rectangle timeRectangle = this.makeColoredRectangle(0,75,1, 0, 0, this.vbom, (int)this.camera.getWidth(), 5);
+
+		final Rectangle advancedRectangle = this.makeColoredRectangle(10,100,0, 1, 0, this.vbom, (int)this.camera.getWidth() - 20, 5);
+
+		BitmapTextureAtlas NaveChicaAtlas = new BitmapTextureAtlas(activity.getTextureManager(), 40, 20, TextureOptions.DEFAULT);
+		ITextureRegion NaveChicaTexture = BitmapTextureAtlasTextureRegionFactory.createFromAsset(NaveChicaAtlas, activity, "navechica.png", 0, 0);
+		NaveChicaAtlas.load();
+		final Sprite NaveChica = new Sprite(0, 93, NaveChicaTexture, activity.getVertexBufferObjectManager());
+		th.addTag("NaveChica");
+		NaveChica.setTag(th.getTag("NaveChica"));
+		
+		
+		//Orders rectangle
+		tutorialScene.attachChild(orderRectangle);
+		
+		tutorialScene.attachChild(advancedRectangle);
+		
+		tutorialScene.attachChild(NaveChica);
+
+		//Time Rectangle
+		th.addTag("timeRectangle");
+		timeRectangle.setTag(th.getTag("timeRectangle"));
+		tutorialScene.attachChild(timeRectangle);
+
+		tutorialScene.attachChild(orderText);
+
+		//Victory and defeat
+		tutorialScene.registerTouchArea(loseSplash);
+		tutorialScene.setTouchAreaBindingOnActionDownEnabled(true);
+		tutorialScene.attachChild(loseSplash);
+
+		tutorialScene.registerTouchArea(victorySplash);
+		tutorialScene.setTouchAreaBindingOnActionDownEnabled(true);
+		tutorialScene.attachChild(victorySplash);
+
+		gt = new GameThread(tutorialScene, gm, orderRectangle, loseSplash, victorySplash);
+	}
 
 	//Method allows you to get the currently active scene
 	public SceneType getCurrentScene() {
@@ -532,6 +721,9 @@ public class SceneManager {
 			break;
 		case TITLE:
 			engine.setScene(titleScene);
+			break;
+		case TUTORIAL:
+			engine.setScene(tutorialScene);
 			break;
 		case MAINGAME:
 			engine.setScene(mainGameScene);
