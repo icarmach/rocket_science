@@ -88,11 +88,13 @@ public class GameThread extends Thread{
 				//currentScene
 				//Change the text of the instruction and check the status
 				//Background progressive change
-				if(timeCounter < 5000)
+				//if(timeCounter < 5000)
+				if(timeCounter < this.gm.timeLimit)
 				{
 					//colorValue = (float)0.8+(timeCounter/5000);
 					//this.orderRectangle.setColor((float)colorValue, 0, 0);
-					timeRectangle.setWidth((float) (480.0 / 5000)*(5000 - timeCounter));
+					//timeRectangle.setWidth((float) (480.0 / 5000)*(5000 - timeCounter));
+					timeRectangle.setWidth((float) (480.0 / this.gm.timeLimit)*(this.gm.timeLimit - timeCounter));
 					timeCounter++;
 				}
 				else

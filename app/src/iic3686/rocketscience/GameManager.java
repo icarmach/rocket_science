@@ -18,6 +18,11 @@ public class GameManager {
 	int index;
 	private Random randomGenerator;
 	public boolean changedRecently;
+	//Time-related variables
+	int timeLimit;
+	//Objectives
+	String currentObjective = "";
+	int currentLevel;
 	
 	public GameManager()
 	{
@@ -44,7 +49,7 @@ public class GameManager {
 		buttons.add(new Button("Microwave", "Kitchen", "Microwave", 1,  "Start the ", "Stop the "));
 		buttons.add(new Button("Oven", "Kitchen", "Oven", 3));
 		//4 - Navigation
-		buttons.add(new Button("Engines", "Nav.", "Engines", 1 , "Start the", "Stop the "));
+		buttons.add(new Button("Engines", "Nav.", "Engines", 1 , "Start the ", "Stop the "));
 		buttons.add(new Button("Autopilot", "Nav.", "Autopilot", 1, "Engage the ", "Disengage the "));
 		buttons.add(new Button("Speed", "Nav.", "Speed", 3));
 		//Define orders
@@ -61,7 +66,11 @@ public class GameManager {
 		currentOrderNumber = 0;
 		//Recently
 		changedRecently = false;
-		
+		//Time
+		timeLimit = 5000;
+		//Obj
+		currentObjective = "Exit the atmosphere";
+		currentLevel = 1;
 	}
 		
 	//Gets a new random order
@@ -133,8 +142,35 @@ public class GameManager {
 	public void newRound()
 	{
 		//Each level add 5 more orders
-		ordersRound += 5;
+		//ordersRound += 5;
+		if(timeLimit - 500 < 3000)
+		{
+			timeLimit = 3000;
+		}
+		else
+		{
+			timeLimit -= 500;
+		}
+		//Objectives
+		currentLevel++;
+		if(currentLevel == 1)
+		{
+			currentObjective = "Exit the atmosphere";
+		}
+		else if(currentLevel == 2)
+		{
+			currentObjective = "Reach the Moon";
+		}
+		else if(currentLevel == 3)
+		{
+			currentObjective = "Reach Mars";
+		}
+		else
+		{
+			currentObjective = "Travel through space";
+		}
 		currentOrderNumber = 0;
+		
 		getNewOrder(); 
 	}
 	
@@ -169,5 +205,10 @@ public class GameManager {
 		{
 			return false;
 		}
+	}
+	
+	public String getCurrentObjective()
+	{
+		return currentObjective;
 	}
 }
