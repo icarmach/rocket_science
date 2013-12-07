@@ -72,7 +72,8 @@ public class SceneManager {
 		TITLE,
 		MAINGAME,
 		STORY,
-		INSTRUCTION
+		INSTRUCTION,
+		TUTORIAL
 	}
 
 	public SceneManager(BaseGameActivity activity, Engine engine, Camera camera) {
@@ -271,6 +272,19 @@ public class SceneManager {
 				return true;
 			}
 		};
+		
+		BitmapTextureAtlas tutorialButtonTextureAtlas = new BitmapTextureAtlas(activity.getTextureManager(), 256, 256, TextureOptions.DEFAULT);
+		ITextureRegion tutorialButtonTexture = BitmapTextureAtlasTextureRegionFactory.createFromAsset(tutorialButtonTextureAtlas, activity, "menu_tutorial.png", 0, 0);
+		tutorialButtonTextureAtlas.load();
+
+		Sprite tutorialButton = new Sprite(0, 0, tutorialButtonTexture, activity.getVertexBufferObjectManager()) {
+			@Override
+			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY) {
+				setCurrentScene(SceneType.TUTORIAL);
+
+				return true;
+			}
+		};
 
 		BitmapTextureAtlas playButtonTextureAtlas = new BitmapTextureAtlas(activity.getTextureManager(), 256, 256, TextureOptions.DEFAULT);
 		ITextureRegion playButtonTexture = BitmapTextureAtlasTextureRegionFactory.createFromAsset(playButtonTextureAtlas, activity, "menu_play.png", 0, 0);
@@ -279,7 +293,7 @@ public class SceneManager {
 		Sprite playButton = new Sprite(0, 0, playButtonTexture, activity.getVertexBufferObjectManager()) {
 			@Override
 			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY) {
-				setCurrentScene(SceneType.STORY);
+				setCurrentScene(SceneType.MAINGAME);
 
 				return true;
 			}
@@ -298,12 +312,17 @@ public class SceneManager {
 		};
 
 		gameBanner.setPosition((camera.getWidth() - gameBanner.getWidth()) * 0.5f, 30);
-		playButton.setPosition((camera.getWidth() - playButton.getWidth()) * 0.5f, (camera.getHeight() - playButton.getHeight()) * 0.5f + 100);
-		quitButton.setPosition((camera.getWidth() - quitButton.getWidth()) * 0.5f, (camera.getHeight() - quitButton.getHeight()) * 0.5f + 200);
+		tutorialButton.setPosition((camera.getWidth() - playButton.getWidth()) * 0.5f, (camera.getHeight() - playButton.getHeight()) * 0.5f + 50);
+		playButton.setPosition((camera.getWidth() - playButton.getWidth()) * 0.5f, (camera.getHeight() - playButton.getHeight()) * 0.5f + 150);
+		quitButton.setPosition((camera.getWidth() - quitButton.getWidth()) * 0.5f, (camera.getHeight() - quitButton.getHeight()) * 0.5f + 250);
 
 		titleScene.registerTouchArea(gameBanner);
 		titleScene.setTouchAreaBindingOnActionDownEnabled(true);
 		titleScene.attachChild(gameBanner);
+		
+		titleScene.registerTouchArea(tutorialButton);
+		titleScene.setTouchAreaBindingOnActionDownEnabled(true);
+		titleScene.attachChild(tutorialButton);
 
 		titleScene.registerTouchArea(playButton);
 		titleScene.setTouchAreaBindingOnActionDownEnabled(true);
