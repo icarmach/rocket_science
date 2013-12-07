@@ -112,6 +112,10 @@ public class GameThread extends Thread{
 				//boton1.setVisible(!boton1.isVisible());
 				//IEntity boton2 = currentScene.getChildByTag(11);
 				//boton2.setVisible(!boton2.isVisible());
+				
+				Sprite NaveChica = (Sprite)currentScene.getChildByTag(th.getTag("NaveChica"));
+				NaveChica.setX((gm.currentOrderNumber * 460)/gm.ordersRound);
+				
 				try {
 					//this.orderRectangle.setColor(1, 1, 1);
 					this.sleep(1);
