@@ -482,8 +482,22 @@ public class SceneManager {
 		final Rectangle orderRectangle = this.makeColoredRectangle(0,0,1, 1, 1, this.vbom, (int)this.camera.getWidth(), 80);
 		final Rectangle timeRectangle = this.makeColoredRectangle(0,75,1, 0, 0, this.vbom, (int)this.camera.getWidth(), 5);
 
+		final Rectangle advancedRectangle = this.makeColoredRectangle(10,100,0, 1, 0, this.vbom, (int)this.camera.getWidth() - 20, 5);
+
+		BitmapTextureAtlas NaveChicaAtlas = new BitmapTextureAtlas(activity.getTextureManager(), 40, 20, TextureOptions.DEFAULT);
+		ITextureRegion NaveChicaTexture = BitmapTextureAtlasTextureRegionFactory.createFromAsset(NaveChicaAtlas, activity, "navechica.png", 0, 0);
+		NaveChicaAtlas.load();
+		final Sprite NaveChica = new Sprite(0, 93, NaveChicaTexture, activity.getVertexBufferObjectManager());
+		th.addTag("NaveChica");
+		NaveChica.setTag(th.getTag("NaveChica"));
+		
+		
 		//Orders rectangle
 		mainGameScene.attachChild(orderRectangle);
+		
+		mainGameScene.attachChild(advancedRectangle);
+		
+		mainGameScene.attachChild(NaveChica);
 
 		//Time Rectangle
 		th.addTag("timeRectangle");
