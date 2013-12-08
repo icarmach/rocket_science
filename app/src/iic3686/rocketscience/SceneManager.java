@@ -414,7 +414,7 @@ public class SceneManager {
 		//Armory Off Button
 		BitmapTextureAtlas armoryOffTextureAtlas = new BitmapTextureAtlas(activity.getTextureManager(), 240, 120, TextureOptions.DEFAULT);
 		ITextureRegion armoryOffTexture = BitmapTextureAtlasTextureRegionFactory.createFromAsset(armoryOffTextureAtlas, activity, "armory_off.png", 0, 0);
-		armoryTextureAtlas.load();
+		armoryOffTextureAtlas.load();
 
 		Sprite armoryOff = new Sprite(0, 0, armoryOffTexture, activity.getVertexBufferObjectManager()) {
 			@Override
@@ -427,7 +427,7 @@ public class SceneManager {
 				//Kitchen Button
 		BitmapTextureAtlas kitchenOffTextureAtlas = new BitmapTextureAtlas(activity.getTextureManager(), 240, 120, TextureOptions.DEFAULT);
 		ITextureRegion kitchenOffTexture = BitmapTextureAtlasTextureRegionFactory.createFromAsset(kitchenOffTextureAtlas, activity, "kitchen_off.png", 0, 0);
-		kitchenTextureAtlas.load();
+		kitchenOffTextureAtlas.load();
 
 		Sprite kitchenOff = new Sprite(0, 0, kitchenOffTexture, activity.getVertexBufferObjectManager()) {
 			@Override
@@ -481,6 +481,9 @@ public class SceneManager {
 		th.addTag("kitchen");
 		kitchen.setTag(th.getTag("kitchen"));
 		//Button text
+		
+		mainGameScene.attachChild(armoryOff);
+		mainGameScene.attachChild(kitchenOff);
 
 		armory.setPosition(0, 140);
 		communication.setPosition(240, 140);
