@@ -199,7 +199,7 @@ public class GameThread extends Thread{
 					}
 				orderTextLabel.setText("Level 3: Reach Mars");
 			}
-			else if(this.gm.currentLevel == 2)
+			else if(this.gm.currentLevel == 3)
 			{
 				orderTextLabel.setText("You reached Mars.");
 				try {
