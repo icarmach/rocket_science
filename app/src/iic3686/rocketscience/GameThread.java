@@ -162,18 +162,18 @@ public class GameThread extends Thread{
 				
 				try {
 					//this.orderRectangle.setColor(1, 1, 1);
-					this.sleep(1);
+					Thread.sleep(1);
 					//this.orderRectangle.setColor(1, 0, 0);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
 			}
 			//END OF ROUND
-			Text orderTextLabel= (Text)currentScene.getChildByTag(1);
+			Text orderTextLabel= (Text)currentScene.getChildByTag(th.getTag("orderText"));
 			//orderTextLabel.setText("Level Complete!");
 			victorySplash.setPosition(0,200);
 			try {
-				this.sleep(4000);
+				Thread.sleep(4000);
 				} catch (InterruptedException e) {
 				e.printStackTrace();
 				}
@@ -183,7 +183,7 @@ public class GameThread extends Thread{
 			{
 				orderTextLabel.setText("You reached the atmosphere.");
 				try {
-					this.sleep(2000);
+					Thread.sleep(2000);
 					} catch (InterruptedException e) {
 					e.printStackTrace();
 					}
@@ -193,7 +193,7 @@ public class GameThread extends Thread{
 			{
 				orderTextLabel.setText("You reached the Moon.");
 				try {
-					this.sleep(2000);
+					Thread.sleep(2000);
 					} catch (InterruptedException e) {
 					e.printStackTrace();
 					}
@@ -203,7 +203,7 @@ public class GameThread extends Thread{
 			{
 				orderTextLabel.setText("You reached Mars.");
 				try {
-					this.sleep(2000);
+					Thread.sleep(2000);
 					} catch (InterruptedException e) {
 					e.printStackTrace();
 					}
@@ -215,7 +215,7 @@ public class GameThread extends Thread{
 			}
 			
 			try {
-				this.sleep(2000);
+				Thread.sleep(2000);
 				} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
