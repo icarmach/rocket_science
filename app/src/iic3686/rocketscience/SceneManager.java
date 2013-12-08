@@ -410,8 +410,33 @@ public class SceneManager {
 				return true;
 			}
 		};
+		
+		//Armory Off Button
+				BitmapTextureAtlas armoryOffTextureAtlas = new BitmapTextureAtlas(activity.getTextureManager(), 240, 120, TextureOptions.DEFAULT);
+				ITextureRegion armoryOffTexture = BitmapTextureAtlasTextureRegionFactory.createFromAsset(armoryOffTextureAtlas, activity, "armory_off.png", 0, 0);
+				armoryTextureAtlas.load();
 
-		//Load victory and defeat texture
+				Sprite armoryOff = new Sprite(0, 0, armoryOffTexture, activity.getVertexBufferObjectManager()) {
+					@Override
+					public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY) {
+						return true;
+					}
+				};
+				
+
+				//Kitchen Button
+				BitmapTextureAtlas kitchenOffTextureAtlas = new BitmapTextureAtlas(activity.getTextureManager(), 240, 120, TextureOptions.DEFAULT);
+				ITextureRegion kitchenOffTexture = BitmapTextureAtlasTextureRegionFactory.createFromAsset(kitchenOffTextureAtlas, activity, "kitchen_off.png", 0, 0);
+				kitchenTextureAtlas.load();
+
+				Sprite kitchenOff = new Sprite(0, 0, kitchenOffTexture, activity.getVertexBufferObjectManager()) {
+					@Override
+					public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY) {
+						return true;
+					}
+				};
+
+		//Load Off victory and defeat texture
 		BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/");
 		loseTextureAtlas = new BitmapTextureAtlas(activity.getTextureManager(), 480, 480, TextureOptions.DEFAULT);
 		loseTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(loseTextureAtlas, activity, "gameover.png", 0, 0);
@@ -550,12 +575,10 @@ public class SceneManager {
 		Sprite armory = new Sprite(0, 0, armoryTexture, activity.getVertexBufferObjectManager()) {
 			@Override
 			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY) {
-				
-				
-				
 				return true;
 			}
 		};
+		
 
 		//Kitchen Button
 		BitmapTextureAtlas kitchenTextureAtlas = new BitmapTextureAtlas(activity.getTextureManager(), 240, 120, TextureOptions.DEFAULT);
@@ -565,8 +588,6 @@ public class SceneManager {
 		Sprite kitchen = new Sprite(0, 0, kitchenTexture, activity.getVertexBufferObjectManager()) {
 			@Override
 			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY) {
-				
-				
 				return true;
 			}
 		};

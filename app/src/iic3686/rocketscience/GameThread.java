@@ -5,6 +5,10 @@ import org.andengine.entity.primitive.Rectangle;
 import org.andengine.entity.scene.Scene;
 import org.andengine.entity.sprite.Sprite;
 import org.andengine.entity.text.Text;
+import org.andengine.opengl.texture.TextureOptions;
+import org.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlas;
+import org.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlasTextureRegionFactory;
+import org.andengine.opengl.texture.region.ITextureRegion;
 
 public class GameThread extends Thread{
 
@@ -47,7 +51,47 @@ public class GameThread extends Thread{
 			timeCounter = 0;
 			errorCounter = 0;
 			while(!this.gm.isRoundOver())
-			{
+			{			
+				//Level crap
+				if(this.gm.currentLevel == 1)
+				{
+					//Display Nav and Comm
+					//Bring the black and white ones, move the originals
+					Sprite armoryOff = (Sprite)currentScene.getChildByTag(th.getTag("armoryOff"));
+					Sprite armoryOn = (Sprite)currentScene.getChildByTag(th.getTag("armory"));
+					Sprite kitchenOff = (Sprite)currentScene.getChildByTag(th.getTag("kitchenOff "));
+					Sprite kitchenOn = (Sprite)currentScene.getChildByTag(th.getTag("kitchen "));
+					armoryOn.setPosition(2000, 2000);
+					kitchenOn.setPosition(2000, 2000);
+					kitchenOff.setPosition(0, 260);
+					armoryOff.setPosition(0, 140);	
+				}
+				else if(this.gm.currentLevel == 2)
+				{
+					//Display Nav, Comm and Armory
+					Sprite armoryOff = (Sprite)currentScene.getChildByTag(th.getTag("armoryOff"));
+					Sprite armoryOn = (Sprite)currentScene.getChildByTag(th.getTag("armory"));
+					Sprite kitchenOff = (Sprite)currentScene.getChildByTag(th.getTag("kitchenOff "));
+					Sprite kitchenOn = (Sprite)currentScene.getChildByTag(th.getTag("kitchen "));
+					armoryOff.setPosition(2000, 2000);
+					kitchenOn.setPosition(2000, 2000);
+					kitchenOff.setPosition(0, 260);
+					armoryOn.setPosition(0, 140);	
+				}
+				else
+				{
+					//Display everything
+					Sprite armoryOff = (Sprite)currentScene.getChildByTag(th.getTag("armoryOff"));
+					Sprite armoryOn = (Sprite)currentScene.getChildByTag(th.getTag("armory"));
+					Sprite kitchenOff = (Sprite)currentScene.getChildByTag(th.getTag("kitchenOff "));
+					Sprite kitchenOn = (Sprite)currentScene.getChildByTag(th.getTag("kitchen "));
+					armoryOff.setPosition(2000, 2000);
+					kitchenOff.setPosition(2000, 2000);
+					kitchenOn.setPosition(0, 260);
+					armoryOn.setPosition(0, 140);	
+				}
+				
+				
 				//GAME LOOP EL LUP LUP
 				if(this.gm.currentOrder == null)
 					this.gm.getNewOrder();
