@@ -107,7 +107,7 @@ public class GameThread extends Thread{
 				{
 					loseSplash.setPosition(0,200);
 					try {
-						this.sleep(2000);
+						Thread.sleep(2000);
 						} catch (InterruptedException e) {
 						e.printStackTrace();
 						}
@@ -118,7 +118,7 @@ public class GameThread extends Thread{
 					Text orderTextLabel= (Text)currentScene.getChildByTag(th.getTag("orderText"));
 					orderTextLabel.setText("Get ready for Level "+levelCounter+"!");
 					try {
-						this.sleep(2000);
+						Thread.sleep(2000);
 						} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -150,7 +150,7 @@ public class GameThread extends Thread{
 					timeCounter = 0;
 				}
 				
-				Text orderTextLabel= (Text)currentScene.getChildByTag(1);
+				Text orderTextLabel= (Text)currentScene.getChildByTag(th.getTag("orderText"));
 				orderTextLabel.setText(this.gm.getCurrentOrderText());
 				//IEntity boton1 = currentScene.getChildByTag(10);
 				//boton1.setVisible(!boton1.isVisible());

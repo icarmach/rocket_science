@@ -559,10 +559,28 @@ public class SceneManager {
 		gt = new GameThread(mainGameScene, gm, orderRectangle, loseSplash, victorySplash);
 	}
 	
-	//Method create the Main Game Scene
-	public void createTutorialScene() {
+	//Method create the Tutorial Scene
+		public void createTutorialScene() {
 		tutorialScene.setBackground(new Background(0, 0, 0));
-		
+		//Engines Off
+		BitmapTextureAtlas TutEnginesAtlasOff = new BitmapTextureAtlas(activity.getTextureManager(), 90, 90, TextureOptions.DEFAULT);
+		ITextureRegion TutEnginesTexturaOff = BitmapTextureAtlasTextureRegionFactory.createFromAsset(TutEnginesAtlasOff, activity, "button_engines_off.png", 0, 0);
+		TutEnginesAtlasOff.load();
+
+		final Sprite TutEnginesOff = new Sprite(2000, 2000, TutEnginesTexturaOff, activity.getVertexBufferObjectManager()) {
+			@Override
+			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY) {
+				if(pSceneTouchEvent.isActionDown()) {
+					setCurrentScene(SceneType.MAINGAME);
+				}
+				return true;
+			}
+		};
+		th.addTag("tutorialEnginesOff");
+		TutEnginesOff.setTag(th.getTag("tutorialEnginesOff"));
+		tutorialScene.registerTouchArea(TutEnginesOff);
+		tutorialScene.attachChild(TutEnginesOff);
+
 		//Top options
 		//Communication Button
 		BitmapTextureAtlas communicationTextureAtlas = new BitmapTextureAtlas(activity.getTextureManager(), 240, 120, TextureOptions.DEFAULT);
@@ -574,6 +592,8 @@ public class SceneManager {
 			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY) {
 				communicationIn(tutorialScene);
 				navigationOut(tutorialScene);
+				
+				tutorialScene.getChildByTag(th.getTag("tutorialEnginesOff")).setPosition(2000, 2000);
 				
 				return true;
 			}
@@ -587,10 +607,12 @@ public class SceneManager {
 		Sprite armory = new Sprite(0, 0, armoryTexture, activity.getVertexBufferObjectManager()) {
 			@Override
 			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY) {
+				
+				
+				
 				return true;
 			}
 		};
-		
 
 		//Kitchen Button
 		BitmapTextureAtlas kitchenTextureAtlas = new BitmapTextureAtlas(activity.getTextureManager(), 240, 120, TextureOptions.DEFAULT);
@@ -600,6 +622,8 @@ public class SceneManager {
 		Sprite kitchen = new Sprite(0, 0, kitchenTexture, activity.getVertexBufferObjectManager()) {
 			@Override
 			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY) {
+				
+				
 				return true;
 			}
 		};
@@ -614,6 +638,8 @@ public class SceneManager {
 			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY) {
 				communicationOut(tutorialScene);
 				navigationIn(tutorialScene);
+				
+				tutorialScene.getChildByTag(th.getTag("tutorialEnginesOff")).setPosition(300, 420);
 				
 				return true;
 			}
@@ -637,8 +663,7 @@ public class SceneManager {
 		//Order text
 		orderText = new Text(20,10, this.mFont, defaultText, new TextOptions(HorizontalAlign.CENTER),this.vbom);
 		orderText.setText("Instruction Area");
-		th.addTag("orderText");
-		orderText.setTag(th.getTag("orderText"));
+
 		//orderText.setTag(100);
 
 		//Button text
@@ -701,6 +726,112 @@ public class SceneManager {
 		
 		communicationIn(tutorialScene);
 		navigationOut(tutorialScene);
+		
+		
+		//tutorial instructions
+		Sprite tutorialInstruction = null;
+		Sprite tutorialTime = null;
+		Sprite tutorialMap = null;
+		Sprite tutorialButtons = null;
+		
+		BitmapTextureAtlas tutInsTextureAtlas = new BitmapTextureAtlas(activity.getTextureManager(), 256, 80, TextureOptions.DEFAULT);
+		ITextureRegion tutInsTexture = BitmapTextureAtlasTextureRegionFactory.createFromAsset(tutInsTextureAtlas, activity, "tutorial_instructions.png", 0, 0);
+		tutInsTextureAtlas.load();
+
+		tutorialInstruction = new Sprite(0, 0, tutInsTexture, activity.getVertexBufferObjectManager()) {
+			@Override
+			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY) {	
+				tutorialScene.getChildByTag(th.getTag("tutorialInstruction")).setPosition(2000, 2000);
+				tutorialScene.getChildByTag(th.getTag("tutorialTime")).setPosition(180, 100);
+				tutorialScene.getChildByTag(th.getTag("tutorialMap")).setPosition(2000, 2000);
+				tutorialScene.getChildByTag(th.getTag("tutorialButtons")).setPosition(2000, 2000);
+				
+				return true;
+			}
+		};
+		
+		th.addTag("tutorialInstruction");
+		tutorialInstruction.setTag(th.getTag("tutorialInstruction"));
+		
+		
+		BitmapTextureAtlas tutTimeTextureAtlas = new BitmapTextureAtlas(activity.getTextureManager(), 256, 80, TextureOptions.DEFAULT);
+		ITextureRegion tutTimeTexture = BitmapTextureAtlasTextureRegionFactory.createFromAsset(tutTimeTextureAtlas, activity, "tutorial_time.png", 0, 0);
+		tutTimeTextureAtlas.load();
+
+		tutorialTime = new Sprite(0, 0, tutTimeTexture, activity.getVertexBufferObjectManager()) {
+			@Override
+			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY) {	
+				tutorialScene.getChildByTag(th.getTag("tutorialInstruction")).setPosition(2000, 2000);
+				tutorialScene.getChildByTag(th.getTag("tutorialTime")).setPosition(2000, 2000);
+				tutorialScene.getChildByTag(th.getTag("tutorialMap")).setPosition(20, 330);
+				tutorialScene.getChildByTag(th.getTag("tutorialButtons")).setPosition(2000, 2000);
+				
+				return true;
+			}
+		};
+		
+		th.addTag("tutorialTime");
+		tutorialTime.setTag(th.getTag("tutorialTime"));
+		
+		BitmapTextureAtlas tutMapTextureAtlas = new BitmapTextureAtlas(activity.getTextureManager(), 256, 80, TextureOptions.DEFAULT);
+		ITextureRegion tutMapTexture = BitmapTextureAtlasTextureRegionFactory.createFromAsset(tutMapTextureAtlas, activity, "tutorial_map.png", 0, 0);
+		tutMapTextureAtlas.load();
+
+		tutorialMap = new Sprite(0, 0, tutMapTexture, activity.getVertexBufferObjectManager()) {
+			@Override
+			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY) {	
+				tutorialScene.getChildByTag(th.getTag("tutorialInstruction")).setPosition(2000, 2000);
+				tutorialScene.getChildByTag(th.getTag("tutorialTime")).setPosition(2000, 2000);
+				tutorialScene.getChildByTag(th.getTag("tutorialMap")).setPosition(2000, 2000);
+				tutorialScene.getChildByTag(th.getTag("tutorialButtons")).setPosition(180, 600);
+		
+				return true;
+			}
+		};
+		
+		th.addTag("tutorialMap");
+		tutorialMap.setTag(th.getTag("tutorialMap"));
+		
+		BitmapTextureAtlas tutButtonTextureAtlas = new BitmapTextureAtlas(activity.getTextureManager(), 256, 80, TextureOptions.DEFAULT);
+		ITextureRegion tutButtonTexture = BitmapTextureAtlasTextureRegionFactory.createFromAsset(tutButtonTextureAtlas, activity, "tutorial_buttons.png", 0, 0);
+		tutButtonTextureAtlas.load();
+
+		tutorialButtons = new Sprite(0, 0, tutButtonTexture, activity.getVertexBufferObjectManager()) {
+			@Override
+			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY) {	
+				
+				return true;
+			}
+		};
+		
+		th.addTag("tutorialButtons");
+		tutorialButtons.setTag(th.getTag("tutorialButtons"));
+		
+		tutorialScene.registerTouchArea(tutorialInstruction);
+		tutorialScene.setTouchAreaBindingOnActionDownEnabled(true);
+		tutorialScene.attachChild(tutorialInstruction);
+		
+		tutorialScene.registerTouchArea(tutorialTime);
+		tutorialScene.setTouchAreaBindingOnActionDownEnabled(true);
+		tutorialScene.attachChild(tutorialTime);
+		
+		tutorialScene.registerTouchArea(tutorialMap);
+		tutorialScene.setTouchAreaBindingOnActionDownEnabled(true);
+		tutorialScene.attachChild(tutorialMap);
+		
+		tutorialScene.registerTouchArea(tutorialButtons);
+		tutorialScene.setTouchAreaBindingOnActionDownEnabled(true);
+		tutorialScene.attachChild(tutorialButtons);
+		
+		tutorialScene.getChildByTag(th.getTag("tutorialInstruction")).setPosition(180, 50);
+		tutorialScene.getChildByTag(th.getTag("tutorialTime")).setPosition(2000, 2000);
+		tutorialScene.getChildByTag(th.getTag("tutorialMap")).setPosition(2000, 2000);
+		tutorialScene.getChildByTag(th.getTag("tutorialButtons")).setPosition(2000, 2000);
+		
+		tutorialScene.getChildByTag(th.getTag("tutorialInstruction")).setScale((float)1.3, (float)1.3);
+		tutorialScene.getChildByTag(th.getTag("tutorialTime")).setScale((float)1.3, (float)1.3);
+		tutorialScene.getChildByTag(th.getTag("tutorialMap")).setScale((float)1.3, (float)1.3);
+		tutorialScene.getChildByTag(th.getTag("tutorialButtons")).setScale((float)1.3, (float)1.3);
 	}
 
 	//Method allows you to get the currently active scene
