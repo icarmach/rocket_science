@@ -59,8 +59,8 @@ public class GameThread extends Thread{
 					//Bring the black and white ones, move the originals
 					Sprite armoryOff = (Sprite)currentScene.getChildByTag(th.getTag("armoryOff"));
 					Sprite armoryOn = (Sprite)currentScene.getChildByTag(th.getTag("armory"));
-					Sprite kitchenOff = (Sprite)currentScene.getChildByTag(th.getTag("kitchenOff "));
-					Sprite kitchenOn = (Sprite)currentScene.getChildByTag(th.getTag("kitchen "));
+					Sprite kitchenOff = (Sprite)currentScene.getChildByTag(th.getTag("kitchenOff"));
+					Sprite kitchenOn = (Sprite)currentScene.getChildByTag(th.getTag("kitchen"));
 					armoryOn.setPosition(2000, 2000);
 					kitchenOn.setPosition(2000, 2000);
 					kitchenOff.setPosition(0, 260);

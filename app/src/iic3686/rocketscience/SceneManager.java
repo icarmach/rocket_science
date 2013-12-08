@@ -475,11 +475,11 @@ public class SceneManager {
 		th.addTag("armoryOff");
 		armoryOff.setTag(th.getTag("armoryOff"));
 		th.addTag("armory");
-		armoryOff.setTag(th.getTag("armory"));
+		armory.setTag(th.getTag("armory"));
 		th.addTag("kitchenOff");
 		kitchenOff.setTag(th.getTag("kitchenOff"));
 		th.addTag("kitchen");
-		kitchenOff.setTag(th.getTag("kitchen"));
+		kitchen.setTag(th.getTag("kitchen"));
 		//Button text
 
 		armory.setPosition(0, 140);
