@@ -73,11 +73,44 @@ public class GameManager {
 		currentLevel = 1;
 	}
 		
-	//Gets a new random order
+	//Gets a new random order from the appropiate level
 	public void getNewOrder()
 	{
+		boolean isFromLevel = false;;
 		index = randomGenerator.nextInt(orders.size());
 		currentOrder = orders.get(index);
+		while(!isFromLevel)
+		{
+			if(currentLevel == 1)
+			{
+				if(currentOrder.buttonLinked.section.equals("Comm.") || currentOrder.buttonLinked.section.equals("Nav."))
+					{
+						isFromLevel = true;
+					}
+				else
+				{
+					index = randomGenerator.nextInt(orders.size());
+					currentOrder = orders.get(index);
+				}
+			}
+			else if(currentLevel == 2)
+			{
+				if(currentOrder.buttonLinked.section.equals("Comm.") || currentOrder.buttonLinked.section.equals("Nav.") || currentOrder.buttonLinked.section.equals("Armory"))
+				{
+					isFromLevel = true;
+				}
+				else
+				{
+					index = randomGenerator.nextInt(orders.size());
+					currentOrder = orders.get(index);
+				}
+			}
+			else
+			{
+				isFromLevel = true;
+			}
+		}
+		
 	}
 	
 	//Checks each time to see if the current number of orders passed is enough
