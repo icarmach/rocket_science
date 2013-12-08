@@ -179,7 +179,41 @@ public class GameThread extends Thread{
 				}
 			levelCounter++;
 			victorySplash.setPosition(2000,2000);
-			orderTextLabel.setText("Get ready for Level "+levelCounter+"!");
+			if(this.gm.currentLevel == 1)
+			{
+				orderTextLabel.setText("You reached the atmosphere.");
+				try {
+					this.sleep(2000);
+					} catch (InterruptedException e) {
+					e.printStackTrace();
+					}
+				orderTextLabel.setText("Level 2: Reach the Moon");
+			}
+			else if(this.gm.currentLevel == 2)
+			{
+				orderTextLabel.setText("You reached the Moon.");
+				try {
+					this.sleep(2000);
+					} catch (InterruptedException e) {
+					e.printStackTrace();
+					}
+				orderTextLabel.setText("Level 3: Reach Mars");
+			}
+			else if(this.gm.currentLevel == 2)
+			{
+				orderTextLabel.setText("You reached Mars.");
+				try {
+					this.sleep(2000);
+					} catch (InterruptedException e) {
+					e.printStackTrace();
+					}
+				orderTextLabel.setText("Level 4: Explore space.");
+			}
+			else
+			{
+				orderTextLabel.setText("Get ready for Level "+levelCounter+"!");
+			}
+			
 			try {
 				this.sleep(2000);
 				} catch (InterruptedException e) {
